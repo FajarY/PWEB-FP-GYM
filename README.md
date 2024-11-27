@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# PWEB-FP-GYM
-=======
 # PWEB-FP
 ___
 
@@ -19,4 +16,3 @@ ___
     - `wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer -O - -q | php -- --quiet`
     - `sudo mv composer.phar /usr/local/bin/composer`
     - `composer upgrade`
->>>>>>> ad6edaf (feat: Initial commit)
