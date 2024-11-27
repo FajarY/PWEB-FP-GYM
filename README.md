@@ -16,3 +16,13 @@ ___
     - `wget https://raw.githubusercontent.com/composer/getcomposer.org/76a7060ccb93902cd7576b67264ad91c8a2700e2/web/installer -O - -q | php -- --quiet`
     - `sudo mv composer.phar /usr/local/bin/composer`
     - `composer upgrade`
+___
+
+# Editting
+- When editting and referencing a tailwind class be sure to run this. Its a tailwindcss compiler that runs in the background
+- `./editting.sh`
+___
+
+# Run
+- Run docker daemon
+- `./deploy.sh`
