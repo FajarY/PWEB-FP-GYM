@@ -25,4 +25,5 @@ ___
 
 # Run
 - Run docker daemon
+- Be sure to use the updated .env, download it in notion and put it in root directory /
 - `./deploy.sh`
