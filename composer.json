@@ -1,0 +1,10 @@
+{
+    "name": "university/pweb-fp",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "University\\PwebFp\\": "src/"
+        }
+    },
+    "require": {}
+}

@@ -1,0 +1,8 @@
+FROM mysql
+
+COPY ./wait_for_it.sh /wait_for_it.sh
+COPY ./wait_for_database.sh /wait_for_database.sh
+COPY ./database.sh /database.sh
+RUN chmod +x /database.sh /wait_for_it.sh /wait_for_database.sh
+
+ENTRYPOINT ["/database.sh"]

@@ -1,0 +1,12 @@
+{
+  "name": "pweb-fp",
+  "version": "1.0.0",
+  "description": "Development only dependencies",
+  "main": "",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.15"
+  }
+}
