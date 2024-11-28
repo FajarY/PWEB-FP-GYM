@@ -19,6 +19,9 @@ services:
           path : ./configs/nginx.conf
           target : /etc/nginx/nginx.conf
         - action : sync+restart
+          path : ./configs/php.ini
+          target : /etc/php/8.3/fpm/php.ini
+        - action : sync
           path : ./src
           target : /var/www/php-website/src
         - action : rebuild

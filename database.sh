@@ -1,7 +1,6 @@
 #!/bin/bash
 
-docker-entrypoint.sh mysqld &
-
+docker-entrypoint.sh postgres &
 ./wait_for_database.sh
 
 wait

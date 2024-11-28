@@ -6,5 +6,8 @@
             "University\\PwebFp\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "php": ">=8.3",
+        "symfony/dotenv": "^7.1"
+    }
 }
