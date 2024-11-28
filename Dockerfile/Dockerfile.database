@@ -1,4 +1,4 @@
-FROM mysql
+FROM postgres
 
 COPY ./wait_for_it.sh /wait_for_it.sh
 COPY ./wait_for_database.sh /wait_for_database.sh

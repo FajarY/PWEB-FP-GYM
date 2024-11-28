@@ -16,14 +16,17 @@ RUN mkdir php-website
 
 WORKDIR php-website
 
+COPY ./configs/php.ini /etc/php/8.3/fpm/php.ini
 COPY ./composer.json composer.json
 COPY ./composer.lock composer.lock
 COPY ./public public
 COPY ./src src
 COPY ./configs/nginx.conf /etc/nginx/nginx.conf
 COPY ./Dockerfile/run.sh run.sh
+COPY ./.env .env
 
 RUN chmod +x run.sh
 RUN composer upgrade
+RUN service php8.3-fpm restart
 
 ENTRYPOINT [ "./run.sh" ]
