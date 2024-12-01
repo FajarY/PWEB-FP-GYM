@@ -11,14 +11,18 @@
     
     CREATE TABLE users (
         id CHAR(36) NOT NULL PRIMARY KEY,
-        username VARCHAR(128) NOT NULL,
-        password CHAR(60) NOT NULL
+        username VARCHAR(128) NOT NULL UNIQUE,
+        password CHAR(60) NOT NULL,
+        profile_image BYTEA NOT NULL,
+        profile_image_type INT NOT NULL
     );
 
     CREATE TABLE exercises (
         id CHAR(36) NOT NULL PRIMARY KEY,
         name VARCHAR(128) NOT NULL,
-        score_multiplier DECIMAL(10, 2) NOT NULL
+        score_multiplier DECIMAL(10, 2) NOT NULL,
+        display_image BYTEA NOT NULL,
+        display_image_type INT NOT NULL
     );
 
     CREATE TABLE workout_plans (

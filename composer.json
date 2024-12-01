@@ -1,13 +1,14 @@
 {
-    "name": "university/pweb-fp",
+    "name": "university/gym-journal",
     "type": "project",
     "autoload": {
         "psr-4": {
-            "University\\PwebFp\\": "src/"
+            "University\\GymJournal\\": "src/"
         }
     },
     "require": {
         "php": ">=8.3",
-        "symfony/dotenv": "^7.1"
+        "symfony/dotenv": "^7.1",
+        "firebase/php-jwt": "^6.10"
     }
 }
