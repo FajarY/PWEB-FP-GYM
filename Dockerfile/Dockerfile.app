@@ -25,7 +25,13 @@ COPY ./configs/nginx.conf /etc/nginx/nginx.conf
 COPY ./Dockerfile/run.sh run.sh
 COPY ./.env .env
 
+RUN touch app.log
+RUN chown www-data:www-data ./app.log
+RUN chmod 664 ./app.log
+
 RUN chmod +x run.sh
+RUN composer upgrade
+RUN composer dump-autoload
 RUN composer upgrade
 RUN service php8.3-fpm restart
 
