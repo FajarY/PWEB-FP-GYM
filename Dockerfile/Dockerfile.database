@@ -1,4 +1,4 @@
-FROM postgres
+FROM postgres:15.4
 
 COPY ./wait_for_it.sh /wait_for_it.sh
 COPY ./wait_for_database.sh /wait_for_database.sh

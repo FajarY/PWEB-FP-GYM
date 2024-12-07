@@ -1,21 +1,20 @@
 <?php
 namespace University\GymJournal\Backend\Controller;
 use University\GymJournal\Backend\App\Controller;
+use University\GymJournal\Backend\App\HTTPUtils;
+use University\GymJournal\Backend\App\Logger;
+use University\GymJournal\Backend\App\Mailer;
+use University\GymJournal\Backend\App\Router;
+use University\GymJournal\Backend\Controller\API\AuthAPIController;
 use University\GymJournal\Backend\Controller\API\ExerciseAPIController;
 use University\GymJournal\Backend\Controller\API\LogAPIController;
 use University\GymJournal\Backend\Controller\API\PlanAPIController;
 use University\GymJournal\Backend\Controller\API\UserAPIController;
+use University\GymJournal\Backend\App\Development;
+use University\GymJournal\Backend\App\DB;
 
 class APIController extends Controller
 {
-    private function register()
-    {
-        
-    }
-    private function login()
-    {
-
-    }
     private function me()
     {
 
@@ -24,16 +23,29 @@ class APIController extends Controller
     {
 
     }
+    //This Endpoint Is Only Available On Development
+    public function reset()
+    {
+        if(!Development::isEnableDevelopment())
+        {
+            return;
+        }
+        Development::validateDevelopmentSecretOrDie404();
+
+        $res = DB::query('TRUNCATE workout_logs_exercises, workout_plans_exercises, workout_plans, workout_logs, users, exercises;', []);
+
+        if($res === null)
+        {
+            HTTPUtils::sendMessage(HTTPUtils::INTERNAL_SERVER_ERROR, 'Error erasing!');
+        }
+        else
+        {
+            HTTPUtils::sendMessage(HTTPUtils::OK, 'Erased all data!');
+        }
+    }
     public function load()
     {
-        parent::post('/register', function()
-        {
-            $this->register();
-        });
-        parent::post('/login', function()
-        {
-            $this->login();
-        });
+        parent::use('/auth', new AuthAPIController());
         parent::get('/me', function()
         {
             $this->me();
@@ -46,7 +58,13 @@ class APIController extends Controller
         {
             $this->leaderboard();
         });
-        
+        if(Development::isEnableDevelopment())
+        {
+            parent::get('/reset', function()
+            {
+                $this->reset();
+            });
+        }
     }
 }
 ?>
