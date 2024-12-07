@@ -9,7 +9,7 @@ class Router
     public static string $method;
     public static array $paths;
     public static array $queries;
-    public static array $body;
+    public static $body;
     public static array $headers;
 
     private static ?Controller $now = null;
@@ -22,6 +22,9 @@ class Router
 
         self::$paths = explode('/', self::$rawPath);
 
+        Logger::Info('Incoming '.self::$method.' '.self::$rawPath);
+
+        
         self::$queries = [];
         if(isset(self::$rawUriParsed['query']))
         {
@@ -44,9 +47,10 @@ class Router
 
         self::$body = [];
         $bodyStream = file_get_contents('php://input');
+
         if($bodyStream)
         {
-            self::$body = json_decode($bodyStream);
+            self::$body = json_decode($bodyStream, true);
         }
     }
     public static function use(Controller $controller)
@@ -61,6 +65,11 @@ class Router
             $currentPath = '/'.self::$paths[$i];
             $routing = self::$now->routes[self::$method];
 
+            if(!isset($routing[$currentPath]))
+            {
+                HTTPUtils::send404HTML();
+                return;
+            }
             $item = $routing[$currentPath];
 
             if($item instanceof Controller)
@@ -95,6 +104,11 @@ class Router
             return;
         }
 
+        if(!isset(self::$now->routes[self::$method][$call]))
+        {
+            HTTPUtils::send404HTML();
+            return;
+        }
         $function = self::$now->routes[self::$method][$call];
 
         if(is_callable($function))
@@ -105,6 +119,26 @@ class Router
         {
             HTTPUtils::send404HTML();
         }
+    }
+    public static function bodyOrNull($key)
+    {
+        if(!isset(self::$body[$key]))
+        {
+            return null;
+        }
+
+        return self::$body[$key];
+    }
+    public static function addKeyBodyOrNull($key, array &$arr, bool &$safeCheck)
+    {
+        if(!isset(self::$body[$key]))
+        {
+            $safeCheck = false;
+
+            return;
+        }
+
+        $arr[$key] = self::$body[$key];
     }
 }
 ?>

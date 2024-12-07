@@ -12,8 +12,8 @@ class LandingController extends Controller
             $view->render();
         });
 
-        parent::use('/register', new RegisterController());
-        parent::use('/login', new LoginController());
+        parent::use('/auth', new AuthController());
+        parent::use('/verify', new VerifyController());
         parent::use('/home', new HomeController());
         parent::use('/plan', new PlanController());
         parent::use('/train', new TrainController());

@@ -26,6 +26,9 @@ services:
           target : /var/www/php-website/src
         - action : rebuild
           path : ./composer.json
+        - action : sync
+          path : ./.env
+          target : /var/www/php-website/.env
 
   php-database:
     container_name: php-database
@@ -38,6 +41,11 @@ services:
       - "8081:3306"
     networks:
       - php-network
+    develop:
+      watch:
+        - action : rebuild
+          path : ./wait_for_database.sh
+          target : /wait_for_database.sh
 
 networks:
   php-network:

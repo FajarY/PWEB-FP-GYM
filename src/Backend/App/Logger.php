@@ -13,6 +13,7 @@ class Logger
     }
     public static function Error(string $message)
     {
+        error_log($message);
         self::WriteToLog('[ERROR] '.$message);
     }
     public static function Critical(string $message)
