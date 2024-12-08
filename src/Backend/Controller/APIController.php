@@ -12,16 +12,22 @@ use University\GymJournal\Backend\Controller\API\PlanAPIController;
 use University\GymJournal\Backend\Controller\API\UserAPIController;
 use University\GymJournal\Backend\App\Development;
 use University\GymJournal\Backend\App\DB;
+use University\GymJournal\Backend\App\JWT;
+use University\GymJournal\Backend\Models\UsersModel;
 
 class APIController extends Controller
 {
     private function me()
     {
+        JWT::checkAuthJWTAndUserVerifiedOrDie();
 
+        $data = HTTPUtils::assertNotNullDieReturns(UsersModel::me(JWT::$id), '/api/me Error when getting data from DB');
+
+        HTTPUtils::sendJson(HTTPUtils::OK, $data);
     }
     private function leaderboard()
     {
-
+        
     }
     //This Endpoint Is Only Available On Development
     public function reset()

@@ -79,5 +79,36 @@ class DB
 
         return null;
     }
+
+    //Unsafe Be Sure To Escape String
+    public static function rawQuery(string $sql) : bool
+    {
+        if(self::$active == null)
+        {
+            self::connect();
+        }
+        if(!self::$active)
+        {
+            return null;
+        }
+
+        try
+        {
+            $status = self::$connection->exec($sql);
+            if(!$status)
+            {
+                return false;
+            }
+
+            return true;
+        }
+        catch(PDOException $error)
+        {
+            error_log($error);
+            Logger::Error($error->__toString());
+        }
+
+        return false;
+    }
 }
 ?>
