@@ -98,7 +98,7 @@ class AuthAPIController extends Controller
 
         $profile_image_raw = base64_decode($value['profile_image']);
 
-        $image_type = UsersModel::getImageType(Image::getImageExtension($profile_image_raw));
+        $image_type = Image::getImageBinaryType(Image::getImageExtension($profile_image_raw));
 
         if($image_type === null)
         {

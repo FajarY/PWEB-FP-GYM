@@ -4,7 +4,9 @@
   "description": "Development only dependencies",
   "main": "",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "authtest": "jest auth.test.js",
+    "apitest": "jest api.test.js"
   },
   "author": "",
   "license": "ISC",

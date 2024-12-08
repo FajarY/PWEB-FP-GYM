@@ -3,7 +3,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "University\\GymJournal\\": "src/"
+            "University\\GymJournal\\": "src/",
+            "Database\\University\\GymJournal\\": "database/"
         }
     },
     "require": {

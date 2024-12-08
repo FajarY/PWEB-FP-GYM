@@ -21,6 +21,23 @@ const BAD_GATEWAY = 502;
 const SERVICE_UNAVAILABLE = 503;
 const GATEWAY_TIMEOUT = 504;
 
+function getRandomString(length)
+{
+    const inputs = [
+        '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+        'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+        'u', 'v', 'w', 'x', 'y', 'z'
+    ];
+    var randomString = '';
+    for(var i = 0; i < length; i++)
+    {
+        randomString += inputs[Math.floor(Math.random() * inputs.length)];
+    }
+
+    return randomString;
+}
+
 module.exports = {
     OK,
     CREATED,
@@ -40,5 +57,6 @@ module.exports = {
     NOT_IMPLEMENTED,
     BAD_GATEWAY,
     SERVICE_UNAVAILABLE,
-    GATEWAY_TIMEOUT
+    GATEWAY_TIMEOUT,
+    getRandomString
 };

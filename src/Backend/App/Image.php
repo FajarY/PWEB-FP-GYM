@@ -12,6 +12,39 @@ class Image
         'png' => "\x89\x50\x4e\x47\x0d\x0a\x1a\x0a",
         'jpg' => "\xFF\xD8\xFF"
     ];
+    public const array supportedImageTypes = [
+        'jpg' => 0,
+        'jpeg' => 0,
+        'png' => 1
+    ];
+    public const array typeToExtension = ['jpg', 'png'];
+
+    public static function getImageBinaryType(?string $type) : ?int
+    {
+        if($type === null)
+        {
+            return null;
+        }
+        if(isset(self::supportedImageTypes[$type]))
+        {
+            return self::supportedImageTypes[$type];
+        }
+
+        return null;
+    }
+    public static function getImageExtensionFromBinaryType(?int $type) : ?string
+    {
+        if($type === null)
+        {
+            return null;
+        }
+        if(isset(self::typeToExtension[$type]))
+        {
+            return self::typeToExtension[$type];
+        }
+
+        return null;
+    }
 
     public static function getImageExtension(string &$binary) : ?string
     {

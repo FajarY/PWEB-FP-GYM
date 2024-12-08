@@ -1,0 +1,70 @@
+{
+    "seeds":[
+        {
+            "id":"277fe419-9762-4843-a00b-485530b9a458",
+            "name": "Pull Up",
+            "score_multiplier": "3",
+            "display_image": "/Exercises/pull-up.png"
+        },
+        {
+            "id":"ce971fe7-8236-40a1-99a5-4320f33607d4",
+            "name": "Sit Up",
+            "score_multiplier": "2",
+            "display_image": "/Exercises/sit-up.png"
+        },
+        {
+            "id":"f287f193-c80f-4202-bd4f-91fd9a1307d7",
+            "name": "Push Up",
+            "score_multiplier": "3",
+            "display_image": "/Exercises/push-up.png"
+        },
+        {
+            "id":"772875f9-7a9d-4bf9-8cdc-5987f3b815ee",
+            "name": "Squat",
+            "score_multiplier": "2",
+            "display_image": "/Exercises/squat.png"
+        },
+        {
+            "id":"0454f7a1-0de0-4603-ba90-0f23fbc7c8a0",
+            "name": "Bench Press",
+            "score_multiplier": "2.5",
+            "display_image": "/Exercises/bench-press.png"
+        },
+        {
+            "id":"78b26b3e-9b0f-4383-aefd-e91360e3496b",
+            "name": "Incline Bench Press",
+            "score_multiplier": "2.5",
+            "display_image": "/Exercises/incline-bench-press.png"
+        },
+        {
+            "id":"ea20cd74-873f-48f8-b847-786db2bc2eb8",
+            "name": "Military Press",
+            "score_multiplier": "3",
+            "display_image": "/Exercises/military-press.png"
+        },
+        {
+            "id":"7771e0c6-06a0-48bc-9543-94f12ad9dbbb",
+            "name": "Lunges",
+            "score_multiplier": "2",
+            "display_image": "/Exercises/lunges.png"
+        },
+        {
+            "id":"d5fe903c-8816-416d-9a2f-96afe14bcc05",
+            "name": "Bicep Curl",
+            "score_multiplier": "1",
+            "display_image": "/Exercises/lunges.png"
+        },
+        {
+            "id":"65d51571-bec8-4b4b-b253-eae5d5852567",
+            "name": "Hammer Curl",
+            "score_multiplier": "1",
+            "display_image": "/Exercises/hammer-curl.png"
+        },
+        {
+            "id":"26b85b7c-d497-4e96-8e84-2fd90bcc051c",
+            "name": "Cable Row",
+            "score_multiplier": "1.5",
+            "display_image": "/Exercises/cable-row.png"
+        }
+    ]
+}
