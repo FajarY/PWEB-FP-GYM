@@ -1,6 +1,8 @@
 <?php
 namespace University\GymJournal\Backend\App;
 
+use Google\Service\Analytics\Resource\Data;
+
 class HTTPUtils
 {
     public const OK = 200;
@@ -54,13 +56,37 @@ class HTTPUtils
             'message' => $message
         ]);
     }
+    public static function sendImage(int $code, string $type, string &$data)
+    {
+        if($type === null || ($type != 'jpg' && $type != 'jpeg' && $type != 'png'))
+        {
+            HTTPUtils::sendMessage(HTTPUtils::INTERNAL_SERVER_ERROR, 'sendImage() Error, unsupported');
+            return;
+        }
+
+        http_response_code($code);
+        header('Content-Type: image/'.$type);
+        echo $data;
+    }
+    public static function sendImageFromResource(int $code, string $type, $data)
+    {
+        if($type === null || ($type != 'jpg' && $type != 'jpeg' && $type != 'png'))
+        {
+            HTTPUtils::sendMessage(HTTPUtils::INTERNAL_SERVER_ERROR, 'sendImage() Error, unsupported');
+            return;
+        }
+
+        http_response_code($code);
+        header('Content-Type: image/'.$type);
+        echo stream_get_contents($data);
+    }
     public static function redirectAndDie(int $code, string $path)
     {
         http_response_code($code);
         header('Location: '.$path);
         die();
     }
-    public static function assertNotNullDie(&$res, $log_info, $message = 'Internal server error!')
+    public static function assertNotNullDie($res, $log_info, $message = 'Internal server error!')
     {
         if($res === null)
         {
@@ -87,6 +113,12 @@ class HTTPUtils
         }
 
         return $res;
+    }
+    public static function internalServerErrorDie($log_info, $message = 'Internal server error!')
+    {
+        self::sendMessage(HTTPUtils::INTERNAL_SERVER_ERROR, $message);
+        Logger::Error($log_info);
+        die();
     }
 }
 ?>

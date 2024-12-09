@@ -3,7 +3,8 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "University\\GymJournal\\": "src/"
+            "University\\GymJournal\\": "src/",
+            "Database\\University\\GymJournal\\": "database/"
         }
     },
     "require": {
@@ -11,6 +12,7 @@
         "symfony/dotenv": "^7.1",
         "firebase/php-jwt": "^6.10",
         "phpmailer/phpmailer": "^6.9",
-        "google/apiclient": "^2.18"
+        "google/apiclient": "^2.18",
+        "fpdf/fpdf": "^1.86"
     }
 }
