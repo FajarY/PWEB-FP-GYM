@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../../../public/output.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Landing View</title>
+  </head>
+  <body>
+    <nav
+      id="navbar"
+      class="bg-cream backdrop-blur-lg sticky top-0 z-50 h-20 flex justify-between items-center p-4 transition duration-[1s]"
+    >
+      <h1 id="logo" class="logo-tan transition duration-1000 delay-[300ms]">
+        GYM JOURNAL
+      </h1>
+      <div class="flex flex-row">
+        <a href="" class="btn-sand mr-5 min-w-20">LOGIN</a>
+        <a href="" class="btn-tan mr-5 min-w-20">SIGN IN</a>
+      </div>
+    </nav>
+    <div
+      class="relative h-[749px] bg-greenPale overflow-hidden py-12 px-8 w-full z-[2] before:content-[''] before:block before:bg-cream before:absolute before:left-1/2 before:bottom-0 before:transform before:-translate-x-1/2 before:rounded-full before:w-[145vw] before:h-[145vw] before:z-[-1] flex justify-center"
+    >
+      <div class="h-[500px] w-[600px] mr-32 z-0">
+        <div>
+          <h1
+            class="font-baloo text-5xl font-bold text-tan mt-10 text-shadow-lg"
+          >
+            <span
+              class="text-cream relative before:content-[''] before:bg-greenLight before:h-[70px] before:w-[120px] before:block before:absolute before:z-[-1] before:top-[-3px] before:left-[-20px] before:rounded-[20px]"
+            >
+              Plan
+            </span>
+            Your Healthy Lifestyle from Home
+          </h1>
+          <p
+            class="mt-[100px] font-baloo text-darkGray font-bold text-shadow-lg mr-10 text-[24px] hover:-translate-y-1 transition cursor-pointer"
+          >
+            Discover how easy it is to stay fit and healthy with personalized
+            plans and guidance—all without leaving your home!
+          </p>
+        </div>
+        <div class="mt-20 flex justify-center">
+          <div id="view-more-btn" class="btn-tan w-[231px] cursor-pointer">
+            VIEW MORE
+          </div>
+        </div>
+      </div>
+      <div
+        class="relative h-[488px] w-[462px] hover:opacity-80 transition duration-700 ml-[-3.75rem] cursor-pointer"
+      >
+        <div
+          class="absolute z-10 rounded-[20px] overflow-hidden h-[488px] w-[462px] top-[-.75rem] left-[-1rem]"
+        >
+          <img
+            src="../Asset/Landing View.jpg"
+            alt="foto"
+            class="h-full w-full object-cover"
+          />
+        </div>
+        <div
+          class="absolute bg-greenLight h-[488px] w-[462px] rounded-[20px] top-3 left-0 z-0"
+        ></div>
+      </div>
+    </div>
+    <div
+      id="second-section"
+      class="bg-greenPale h-[829px] flex justify-center p-6"
+    >
+      <div class="bg-red-500 w-[600px] h-[650px] mt-5 mr-20">
+        <div
+          class="bg-blue-600 w-[400px] h-[280px] rounded-[20px] overflow-hidden"
+        ></div>
+        <div
+          class="bg-blue-600 w-[480px] h-[310px] mt-[60px] rounded-[20px] overflow-hidden"
+        ></div>
+      </div> 
+      <div class="bg-red-500 w-[600px] h-[650px] mt-5"></div>
+    </div>
+    <div class="bg-greenPale h-[829px]">hel</div>
+    <script>
+      window.addEventListener("scroll", () => {
+        const navbar = document.getElementById("navbar");
+        const logo = document.getElementById("logo");
+        const position = window.scrollY;
+        if (position > 500) {
+          navbar.classList.add("bg-tan/60");
+          logo.classList.remove("logo-tan");
+          logo.classList.add("logo-cream");
+        } else {
+          navbar.classList.remove("bg-tan/60");
+          logo.classList.add("logo-tan");
+          logo.classList.remove("logo-cream");
+        }
+      });
+
+      const viewMoreBtn = document.getElementById("view-more-btn");
+
+      viewMoreBtn.addEventListener("click", () => {
+        const target = document.getElementById("second-section");
+        const offset = 80;
+        const targetPosition =
+          target.getBoundingClientRect().top + window.pageYOffset;
+        const scrollPosition = targetPosition - offset;
+
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: "smooth",
+        });
+      });
+    </script>
+  </body>
+</html>

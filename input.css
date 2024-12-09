@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .logo-tan {
+    @apply font-baloo text-tan font-bold text-3xl text-shadow-lg stroke-tan stroke-2;
+  }
+
+  .logo-cream {
+    @apply font-baloo text-cream font-bold text-3xl text-shadow-lg stroke-cream stroke-2;
+  }
+
+  .text-stroke {
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: #fefae0;
+  }
+  .text-stroke-2 {
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #fefae0;
+  }
+
+  .btn-sand {
+    @apply p-4 bg-sand text-tan font-baloo rounded-3xl shadow-custom font-bold text-center hover:bg-sand/90 hover:text-tan/80 hover:-translate-y-1 transition;
+  }
+
+  .btn-tan {
+    @apply p-4 bg-tan text-cream font-baloo rounded-3xl font-bold shadow-custom text-center hover:bg-tan/90 hover:text-cream/80 hover:-translate-y-1 transition;
+  }
+}
