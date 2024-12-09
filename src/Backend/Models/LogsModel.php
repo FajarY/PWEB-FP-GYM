@@ -233,6 +233,72 @@ class LogsModel
 
         return true;
     }
+    public static function getHighestPoint(int $count) : ?array
+    {
+        $res = DB::query(
+            '
+            SELECT u.username, sc.score_multiplier, sc.users_id, sc.sets
+            FROM users u
+            JOIN
+                (SELECT ex.score_multiplier, sq.users_id, sq.sets
+                FROM exercises ex
+                JOIN (
+                    SELECT wl.users_id, wle.exercises_id, wle.sets
+                        FROM workout_logs wl
+                        LEFT JOIN workout_logs_exercises wle ON wl.id=wle.workout_logs_id) sq ON ex.id=sq.exercises_id) sc ON u.id = sc.users_id;
+            ', []
+        );
+        if($res === null)
+        {
+            return null;
+        }
+
+        $userScores = [];
+        for($i = 0; $i < count($res); $i++)
+        {
+            $sets = $res[$i]['sets'];
+            $sets = json_decode($sets, true);
+            $point = 0;
+            for($j = 0; $j < count($sets); $j++)
+            {
+                $point += ($sets[$j]['kg'] * $sets[$j]['reps']);
+            }
+            $point *= $res[$i]['score_multiplier'];
+            $userId = $res[$i]['users_id'];
+
+            if(isset($userScores[$userId]))
+            {
+                $userScores[$userId]['score'] += $point;
+            }
+            else
+            {
+                $userScores[$userId] = [
+                    'username' => $res[$i]['username'],
+                    'score' => $point
+                ];
+            }
+        }
+
+        $data = [];
+        foreach($userScores as $key => $value)
+        {
+            $data[] = [
+                'id' => $key,
+                'username' => $value['username'],
+                'score' => $value['score']
+            ];
+        }
+        usort($data, function ($a, $b) {
+            return $b['score'] <=> $a['score'];
+        });
+        $ret = [];
+        for($i = 0; $i < min(count($data), $count); $i++)
+        {
+            $ret[] = $data[$i];
+        }
+
+        return $ret;
+    }
 }
 
 ?>

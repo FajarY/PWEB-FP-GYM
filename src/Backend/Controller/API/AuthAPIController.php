@@ -17,7 +17,7 @@ use University\GymJournal\Backend\App\Logger;
 
 class AuthAPIController extends Controller
 {
-    public function complete()
+    private function complete()
     {
         if(empty(Router::$queries['code']))
         {
@@ -67,14 +67,14 @@ class AuthAPIController extends Controller
             HTTPUtils::redirectAndDie(HTTPUtils::OK, '/verify');
         }
     }
-    public function request()
+    private function request()
     {
         $url = OAuth::createGoogleAuthURL();
         HTTPUtils::assertNotNullDie($url, '/api/auth/request Error getting auth URL');
 
         HTTPUtils::redirectAndDie(HTTPUtils::OK, $url);
     }
-    public function verify()
+    private function verify()
     {
         JWT::checkAuthJWTOrDie();
 

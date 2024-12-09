@@ -13,6 +13,7 @@ use University\GymJournal\Backend\Controller\API\UserAPIController;
 use University\GymJournal\Backend\App\Development;
 use University\GymJournal\Backend\App\DB;
 use University\GymJournal\Backend\App\JWT;
+use University\GymJournal\Backend\Models\LogsModel;
 use University\GymJournal\Backend\Models\UsersModel;
 
 class APIController extends Controller
@@ -27,10 +28,16 @@ class APIController extends Controller
     }
     private function leaderboard()
     {
-        
+        JWT::checkAuthJWTAndUserVerifiedOrDie();
+
+        $data = HTTPUtils::assertNotNullDieReturns(LogsModel::getHighestPoint(10), '/api/leaderboard Error when querying');
+
+        HTTPUtils::sendJson(HTTPUtils::OK, [
+            'items' => $data
+        ]);
     }
     //This Endpoint Is Only Available On Development
-    public function reset()
+    private function reset()
     {
         if(!Development::isEnableDevelopment())
         {

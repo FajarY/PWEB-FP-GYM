@@ -8,7 +8,7 @@ use University\GymJournal\Backend\Models\PlansModel;
 
 class PlanAPIController extends Controller
 {
-    public function getFull()
+    private function getFull()
     {
         JWT::checkAuthJWTAndUserVerifiedOrDie();
 
@@ -42,7 +42,7 @@ class PlanAPIController extends Controller
 
         HTTPUtils::sendJson(HTTPUtils::OK, $data);
     }
-    public function headersAll()
+    private function headersAll()
     {
         JWT::checkAuthJWTAndUserVerifiedOrDie();
 
@@ -52,7 +52,7 @@ class PlanAPIController extends Controller
             'plans' => $data
         ]);
     }
-    public function create()
+    private function create()
     {
         JWT::checkAuthJWTAndUserVerifiedOrDie();
 
@@ -81,7 +81,7 @@ class PlanAPIController extends Controller
             'id' => $registerId
         ]);
     }
-    public function update()
+    private function update()
     {
         JWT::checkAuthJWTAndUserVerifiedOrDie();
 
@@ -129,7 +129,7 @@ class PlanAPIController extends Controller
             'success' => $status
         ]);
     }
-    public function delete()
+    private function delete()
     {
         JWT::checkAuthJWTAndUserVerifiedOrDie();
 
