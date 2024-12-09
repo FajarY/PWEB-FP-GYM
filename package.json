@@ -4,7 +4,8 @@
   "description": "Development only dependencies",
   "main": "",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "watch": "npx tailwindcss -i ./input.css -o ./public/output.css --watch"
   },
   "author": "",
   "license": "ISC",

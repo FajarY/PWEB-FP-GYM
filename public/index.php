@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/../vendor/autoload.php';
 use Symfony\Component\Dotenv\Dotenv;
 use University\GymJournal\Backend\App\Router;
@@ -9,4 +10,3 @@ $dotenv->load(__DIR__.'/../.env');
 
 Router::load();
 Router::use(new LandingController());
-?>

@@ -1,4 +1,5 @@
 <?php
+
 namespace University\GymJournal\Backend\View;
 
 use University\GymJournal\Backend\App\HTTPUtils;
@@ -11,4 +12,3 @@ class LandingView extends View
         HTTPUtils::sendHTML(200, '/');
     }
 }
-?>
