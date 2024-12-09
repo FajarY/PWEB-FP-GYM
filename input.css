@@ -27,4 +27,8 @@
   .btn-tan {
     @apply p-4 bg-tan text-cream font-baloo rounded-3xl font-bold shadow-custom text-center hover:bg-tan/90 hover:text-cream/80 hover:-translate-y-1 transition;
   }
+
+  .btn-cream {
+    @apply p-4 bg-cream text-tan font-baloo rounded-3xl font-bold shadow-custom text-center hover:bg-cream/90 hover:text-tan/80 hover:-translate-y-1 transition;
+  }
 }
