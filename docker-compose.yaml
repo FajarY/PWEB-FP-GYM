@@ -47,6 +47,28 @@ services:
           path : ./wait_for_database.sh
           target : /wait_for_database.sh
 
+  php-migrateseeder:
+    container_name: php-migrateseeder
+    build:
+      context: .
+      dockerfile: ./Dockerfile/Dockerfile.migrateseeder
+    env_file:
+      - .env
+    networks:
+      - php-network
+    develop:
+      watch:
+        - action : sync
+          path : ./src
+          target : /var/www/php-migrateseeder/src
+        - action : rebuild
+          path : ./Dockerfile/migrateseeder.sh
+          target : /var/www/php-migrateseeder/migrateseeder.sh
+        - action : sync+restart
+          path : ./database
+          target : /var/www/php-migrateseeder/database
+    restart: "no"
+
 networks:
   php-network:
     name: 'php-network'

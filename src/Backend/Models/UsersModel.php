@@ -7,25 +7,6 @@ use University\GymJournal\Backend\App\Logger;
 
 class UsersModel
 {
-    public const array supportedImageTypes = [
-        'jpg' => 0,
-        'jpeg' => 0,
-        'png' => 1
-    ];
-
-    public static function getImageType(?string $type) : ?int
-    {
-        if($type === null)
-        {
-            return null;
-        }
-        if(isset(self::supportedImageTypes[$type]))
-        {
-            return self::supportedImageTypes[$type];
-        }
-
-        return null;
-    }
     public static function existEmail(string $email) : ?bool
     {
         $res = DB::query('SELECT email FROM users WHERE email=:email',
@@ -128,6 +109,43 @@ class UsersModel
             return false;
         }
 
+        return true;
+    }
+    public static function me(string $id) : ?array
+    {
+        $res = DB::query(
+            'SELECT id, email, username, date_of_birth, created_at FROM users WHERE id=:id',
+            [
+                'id' => $id
+            ], []
+        );
+        if($res === null || count($res) <= 0)
+        {
+            return null;
+        }
+
+        return $res[0];
+    }
+    public static function image(string $id, array &$output) : ?bool
+    {
+        $res = DB::query(
+            'SELECT profile_image, profile_image_type FROM users WHERE id=:id',
+            [
+                'id' => $id
+            ],[]
+        );
+
+        if($res === null)
+        {
+            return null;
+        }
+        if(count($res) <= 0)
+        {
+            return false;
+        }
+
+        $output['profile_image'] = $res[0]['profile_image'];
+        $output['profile_image_type'] = $res[0]['profile_image_type'];
         return true;
     }
 }

@@ -6,6 +6,8 @@
   "scripts": {
     "test": "jest",
     "watch": "npx tailwindcss -i ./input.css -o ./public/output.css --watch"
+    "authtest": "jest auth.test.js",
+    "apitest": "jest api.test.js"
   },
   "author": "",
   "license": "ISC",
