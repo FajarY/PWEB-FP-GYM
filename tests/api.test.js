@@ -697,3 +697,54 @@ test('[AUTHORIZED] Get log data [/api/log?id={string}]', async () =>
         }
     }
 });
+
+test('[AUTHORIZED] Get leaderboard data [/api/leaderboard]', async () =>
+{
+    const req =
+    {
+        method: "GET",
+        headers:
+        {
+            'Content-Type': 'application/json'
+        }
+    };
+    if(use_cookie)
+    {
+        req.headers['Cookie'] = `token=${token};`;
+    }
+    else
+    {
+        req.headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const res = await fetch(url + 'api/leaderboard', req);
+
+    expect(res.status).toBe(utils.OK);
+
+    const data = await res.json();
+
+    expect(data).toHaveProperty('items');
+    for(var i = 0; i < data.items.length; i++)
+    {
+        const item = data.items[i];
+        expect(item).toHaveProperty('id');
+        expect(item).toHaveProperty('username');
+        expect(item).toHaveProperty('score');
+    }
+});
+
+test('[UNAUTHORIZED] Get leaderboard data [/api/leaderboard]', async () =>
+{
+    const req =
+    {
+        method: "GET",
+        headers:
+        {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const res = await fetch(url + 'api/leaderboard', req);
+
+    expect(res.status).toBe(utils.UNAUTHORIZED);
+});
