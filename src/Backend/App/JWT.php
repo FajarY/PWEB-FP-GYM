@@ -166,6 +166,14 @@ class JWT
             HTTPUtils::redirectAndDie(HTTPUtils::UNAUTHORIZED, '/verify?unauthorized=true');
         }
     }
+    public static function checkAuthFPDFOr404Die()
+    {
+        if(!isset(Router::$queries['token']) || Router::$queries['token'] != $_SERVER['FPDF_SECRET'])
+        {
+            HTTPUtils::send404HTML();
+            die();
+        }
+    }
 }
 
 ?>
