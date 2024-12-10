@@ -6,7 +6,117 @@
   <title>Workout Plan</title>
   <link rel="stylesheet" href="css/Plan.css">
   <style>
-    /* Your styles here, or link the external Plan.css */
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .navbar {
+      background-color: #333;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-size: 24px;
+    }
+
+    .navbar nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+    }
+
+    .profile img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .workout-container {
+      margin: 20px;
+    }
+
+    .workout-section {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .workout-list {
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .workout-item {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      gap: 10px;
+    }
+
+    .workout-item input {
+      width: 60px;
+      padding: 5px;
+      margin-right: 10px;
+      text-align: center;
+    }
+
+    .workout-item button {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 5px 10px;
+      font-size: 16px;
+    }
+
+    .workout-item button:hover {
+      background-color: #e53935;
+    }
+
+    #add-workout-btn {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+
+    #add-workout-btn:hover {
+      background-color: #45a049;
+    }
+
+    .upload-photo {
+      margin-left: 20px;
+    }
+
+    .upload-file-input {
+      display: none;
+    }
+
+    .done-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .done-btn:hover {
+      background-color: #45a049;
+    }
   </style>
 </head>
 <body>
