@@ -1,0 +1,110 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d3dcc5;
+  }
+  
+  header {
+    background-color: #f6f1dc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #d4a473;
+  }
+  
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin: 0 15px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .user-profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-profile img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  /* Main Content */
+  main {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+  
+  .workout, .timer {
+    background-color: #d4a473;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 40%;
+  }
+  
+  .workout img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .workout p, .timer p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .timer h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Controls */
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #e5ccb1;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #d4a473;
+    color: #fff;
+  }
+  
