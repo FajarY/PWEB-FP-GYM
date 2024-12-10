@@ -1,4 +1,4 @@
-const arr = Buffer.alloc(512);
+const arr = Buffer.alloc(256);
 crypto.getRandomValues(arr);
 
-console.log(crypto.randomUUID());
+console.log(arr.toString('base64url'));

@@ -42,10 +42,8 @@ class ExerciseAPIController extends Controller
 
         HTTPUtils::sendJson(HTTPUtils::OK, $data);
     }
-    private function image()
+    private function sendImage()
     {
-        JWT::checkAuthJWTAndUserVerifiedOrDie();
-
         if(!isset(Router::$queries['id']))
         {
             HTTPUtils::sendMessage(HTTPUtils::BAD_REQUEST, "'id' cannot be empty!");
@@ -63,6 +61,18 @@ class ExerciseAPIController extends Controller
 
         HTTPUtils::sendImageFromResource(HTTPUtils::OK, Image::getImageExtensionFromBinaryType($data['display_image_type']), $data['display_image']);
     }
+    private function image()
+    {
+        JWT::checkAuthJWTAndUserVerifiedOrDie();
+
+        $this->sendImage();
+    }
+    private function imageInternal()
+    {
+        JWT::checkAuthFPDFOr404Die();
+
+        $this->sendImage();
+    }
 
     public function load()
     {
@@ -77,6 +87,10 @@ class ExerciseAPIController extends Controller
         parent::get('/image', function()
         {
             $this->image();
+        });
+        parent::get('/imageinternal', function()
+        {
+            $this->imageInternal();
         });
     }
 }

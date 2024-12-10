@@ -9,10 +9,8 @@ use University\GymJournal\Backend\Models\UsersModel;
 
 class UserAPIController extends Controller
 {
-    private function image()
+    private function sendImage()
     {
-        JWT::checkAuthJWTAndUserVerifiedOrDie();
-
         if(!isset(Router::$queries['id']))
         {
             HTTPUtils::sendJson(HTTPUtils::BAD_REQUEST, "'id' is empty!");
@@ -34,11 +32,28 @@ class UserAPIController extends Controller
 
         HTTPUtils::sendImageFromResource(HTTPUtils::OK, Image::getImageExtensionFromBinaryType($data['profile_image_type']), $data['profile_image']);
     }
+    private function image()
+    {
+        JWT::checkAuthJWTAndUserVerifiedOrDie();
+
+        $this->sendImage();
+    }
+    private function imageinternal()
+    {
+        JWT::checkAuthFPDFOr404Die();
+
+        $this->sendImage();
+    }
+    
     public function load()
     {
         parent::get('/image', function()
         {
             $this->image();
+        });
+        parent::get('/imageinternal', function()
+        {
+            $this->imageinternal();
         });
     }
 }

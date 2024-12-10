@@ -126,6 +126,21 @@ class UsersModel
 
         return $res[0];
     }
+    public static function get(string $id) : ?array
+    {
+        $res = DB::query(
+            'SELECT id, email, username, date_of_birth, created_at, profile_image_type, verified FROM users WHERE id=:id',
+            [
+                'id' => $id
+            ], []
+        );
+        if($res === null || count($res) <= 0)
+        {
+            return null;
+        }
+
+        return $res[0];
+    }
     public static function image(string $id, array &$output) : ?bool
     {
         $res = DB::query(
