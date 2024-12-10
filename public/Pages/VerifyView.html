@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../output.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Register View</title>
+  </head>
+  <body class="font-baloo">
+    <div class="flex">
+      <!-- Left Section -->
+      <div class="bg-greenLight h-screen w-[540px] overflow-hidden relative">
+        <img
+          src="../Asset/Landing View.jpg"
+          alt="foto gym"
+          class="h-full w-full object-cover opacity-20"
+        />
+        <div
+          class="absolute top-0 left-0 w-full h-full flex items-center justify-center flex-col"
+        >
+          <h1
+            class="text-cream text-shadow-lg text-[48px] font-bold mb-4 border-b-4 border-cream max-h-32"
+          >
+            GYM JOURNAL
+          </h1>
+          <p class="text-[20px] mt-[-10px] text-cream text-shadow-lg">
+            Start your journey for better life
+          </p>
+        </div>
+      </div>
+      <div class="bg-cream h-screen w-full flex justify-center items-center">
+        <div class="w-[800px] h-[600px] rounded-xl p-8">
+          <div class="w-full mb-8">
+            <h1 class="font-bold text-darkGray text-[48px] text-shadow-lg">
+              You’re almost there
+            </h1>
+            <p class="text-darkGray text-[20px]">Please input your data</p>
+          </div>
+          <form class="space-y-6">
+            <div class="flex space-x-4">
+              <div class="w-1/2">
+                <label class="block text-darkGray font-bold mb-2"
+                  >Username <span class="text-[#E54466]">*</span></label
+                >
+                <input
+                  type="text"
+                  placeholder="Username"
+                  class="w-full border border-darkGray/20 bg-cream rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-greenPale shadow-custom"
+                />
+              </div>
+              <div class="w-1/2">
+                <label class="block text-darkGray font-bold mb-2"
+                  >Date of Birth <span class="text-[#E54466]">*</span></label
+                >
+                <input
+                  type="date"
+                  class="w-full border border-darkGray/20 bg-cream rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-greenPale shadow-custom"
+                />
+              </div>
+            </div>
+
+            <!-- Photo Upload -->
+            <div>
+              <label class="block text-darkGray font-bold mb-2"
+                >Photo Profile <span class="text-[#E54466]">*</span></label
+              >
+              <div
+                id="photo"
+                class="border-2 border-dashed border-darkGray rounded-lg p-6 text-center flex flex-col items-center justify-center relative"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 text-darkGray"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 16l4-4m0 0l4 4m-4-4v12"
+                  />
+                </svg>
+                <p id="file-label" class="text-darkGray">
+                  Pick your photo here
+                </p>
+                <label
+                  class="mt-4 btn-tan-other h-[43px] w-[230px] flex justify-center items-center cursor-pointer"
+                  for="photo-upload"
+                >
+                  Add file
+                </label>
+                <input
+                  id="photo-upload"
+                  type="file"
+                  accept="image/*"
+                  class="hidden"
+                  onchange="handleFileChange(event)"
+                />
+              </div>
+            </div>
+            <div class="mt-4">
+              <button
+                type="submit"
+                class="h-[43px] w-full btn-tan-other flex justify-center items-center"
+              >
+                Register
+              </button>
+            </div>
+          </form>
+
+          <!-- Login Link -->
+          <p class="text-center mt-4 text-shadow-lg">
+            Already have an account?
+            <a href="#" class="text-tan font-bold hover:underline">Login</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function handleFileChange(event) {
+        const fileInput = event.target;
+        const photo = document.getElementById("photo");
+        const fileLabel = document.getElementById("file-label");
+        const file = fileInput.files[0];
+
+        if (file) {
+          fileLabel.textContent = `Selected file: ${file.name}`;
+          fileLabel.classList.add("text-cream", "font-semibold");
+          photo.classList.add("bg-tan/20");
+        } else {
+          fileLabel.textContent = "Pick your photo here";
+          fileLabel.classList.remove("text-cream", "font-semibold");
+          photo.classList.remove("bg-tan/20");
+        }
+      }
+    </script>
+  </body>
+</html>
