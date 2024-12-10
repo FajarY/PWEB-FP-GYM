@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f7f4d9;
+    color: #333;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    color: #ff9b42;
+    font-size: 1.5rem;
+  }
+  
+  .navbar nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+  
+  .workout-container {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .workout-container h2 {
+    color: #c0936a;
+  }
+  
+  .workout-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+  
+  .workout-list {
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .workout-list h3 {
+    color: #c0936a;
+  }
+  
+  .workout-item {
+    display: flex;
+    justify-content: space-between;
+    background: #f7f4d9;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+  }
+  
+  .upload-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+  }
+  
+  .photo-box {
+    border: 2px dashed #ccc;
+    text-align: center;
+    padding: 2rem;
+    width: 80%;
+    border-radius: 8px;
+  }
+  
+  .upload-icon {
+    font-size: 2rem;
+    color: #ccc;
+  }
+  
+  .add-file-btn {
+    background: #c0936a;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .done-btn {
+    margin-top: 2rem;
+    background: #c0936a;
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    cursor: pointer;
+  }
+  

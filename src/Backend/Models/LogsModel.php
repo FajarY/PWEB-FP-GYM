@@ -299,6 +299,57 @@ class LogsModel
 
         return $ret;
     }
+    public static function getAll(string $userId) : ?array
+    {
+        $res = DB::query(
+            'SELECT wl.id, wl.name, wl.complete_at, wl.workout_time, wl.exercises_id, wl.sets, ex.name as exercises_name
+                FROM
+                (SELECT wl.id, wl.name, wl.complete_at, wl.workout_time, wle.exercises_id, wle.sets
+                FROM
+                    (SELECT wl.id, wl.name, wl.complete_at, wl.workout_time
+                    FROM workout_logs wl
+                        WHERE users_id=:users_id) wl
+                    LEFT JOIN workout_logs_exercises wle
+                        ON wle.workout_logs_id=wl.id) wl
+                JOIN exercises ex
+                    ON ex.id=wl.exercises_id',
+            [
+                'users_id' => $userId
+            ], []
+        );
+
+        if($res === null)
+        {
+            return null;
+        }
+
+        $mapped = [];
+        for($i = 0; $i < count($res); $i++)
+        {
+            $item = $res[$i];
+            if(!isset($mapped[$item['id']]))
+            {
+                $mapped[$item['id']] = [
+                    'name' => $item['name'],
+                    'complete_at' => $item['complete_at'],
+                    'workout_time' => $item['workout_time'],
+                    'exercises' => [],
+                    'count' => 0
+                ];
+            }
+            $sets = json_decode($item['sets'], true);
+
+            $mapped[$item['id']]['exercises'][] = [
+                'id' => $item['exercises_id'],
+                'name' => $item['exercises_name'],
+                'sets' => $sets
+            ];
+
+            $mapped[$item['id']]['count'] += 1;
+        }
+
+        return $mapped;
+    }
 }
 
 ?>

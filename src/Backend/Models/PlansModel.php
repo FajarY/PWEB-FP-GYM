@@ -270,6 +270,57 @@ class PlansModel
 
         return true;
     }
+    public static function getAll(string $userId) : ?array
+    {
+        $res = DB::query(
+            'SELECT wp.id, wp.name, wp.created_at, wp.modified_at, wp.exercises_id, wp.sets, ex.name as exercises_name
+                FROM
+                (SELECT wp.id, wp.name, wp.created_at, wp.modified_at, wpe.exercises_id, wpe.sets
+                FROM
+                    (SELECT wp.id, wp.name, wp.created_at, wp.modified_at
+                    FROM workout_plans wp
+                        WHERE users_id=:users_id) wp
+                    LEFT JOIN workout_plans_exercises wpe
+                        ON wpe.workout_plans_id=wp.id) wp
+                JOIN exercises ex
+                    ON ex.id=wp.exercises_id',
+            [
+                'users_id' => $userId
+            ], []
+        );
+
+        if($res === null)
+        {
+            return null;
+        }
+
+        $mapped = [];
+        for($i = 0; $i < count($res); $i++)
+        {
+            $item = $res[$i];
+            if(!isset($mapped[$item['id']]))
+            {
+                $mapped[$item['id']] = [
+                    'name' => $item['name'],
+                    'created_at' => $item['created_at'],
+                    'modified_at' => $item['modified_at'],
+                    'exercises' => [],
+                    'count' => 0
+                ];
+            }
+            $sets = json_decode($item['sets'], true);
+
+            $mapped[$item['id']]['exercises'][] = [
+                'id' => $item['exercises_id'],
+                'name' => $item['exercises_name'],
+                'sets' => $sets
+            ];
+
+            $mapped[$item['id']]['count'] += 1;
+        }
+
+        return $mapped;
+    }
 }
 
 ?>

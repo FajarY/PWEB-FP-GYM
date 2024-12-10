@@ -17,7 +17,28 @@ cfg.config(
 
 const url = process.env.url;
 var token = process.env.token;
+const fpdfSecret = process.env.FPDF_SECRET;
 const use_cookie = process.env.use_cookie;
+
+function createRandomizedId(maxCount, randomize)
+{
+    var arr = [];
+    for(var i = 0; i < maxCount; i++)
+    {
+        arr.push(i);
+    }
+
+    for(var i = 0; i < randomize; i++)
+    {
+        left = randomInt(maxCount);
+        right = randomInt(maxCount);
+
+        temp = arr[left];
+        arr[left] = arr[right];
+        arr[right] = temp;
+    }
+    return arr;
+}
 
 test('[UNAUTHORIZED] Get authorized user data, [/api/me]', async () =>
 {
@@ -108,6 +129,38 @@ test('[AUTHORIZED] Get user image, but not found [/api/user/image?id={string}]',
     const res = await fetch(url + `api/user/image?id=1231434243`, req);
 
     expect(res.status).toBe(utils.NOT_FOUND);
+});
+
+test('[UNAUTHORIZED] Get user imageinternal, but not found [/api/user/imageinternal?id={string}&token={string}]', async () =>
+{
+    const req =
+    {
+        method: "GET",
+        headers:
+        {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const res = await fetch(url + `api/user/imageinternal?id=${id}`, req);
+
+    expect(res.status).toBe(utils.NOT_FOUND);
+});
+
+test('[AUTHORIZED] Get user imageinternal, but not found [/api/user/imageinternal?id={string}&token={string}]', async () =>
+{
+    const req =
+    {
+        method: "GET",
+        headers:
+        {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const res = await fetch(url + `api/user/imageinternal?id=${id}&token=${fpdfSecret}`, req);
+
+    expect(res.status).toBe(utils.OK);
 });
 
 test('[AUTHORIZED] Get user image [/api/user/image?id={string}]', async () =>
@@ -282,6 +335,49 @@ test('[AUTHORIZED] Get a exercise images [/api/exercise/image?id={string}]', asy
     }
 });
 
+test('[UNAUTHORIZED] Get a exercise images internal [/api/exercise/imageinternal?id={string}&token={string}]', async () =>
+{
+    for(var i = 0; i < exercises.length; i++)
+    {
+        const req =
+        {
+            method: "GET",
+            headers:
+            {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const res = await fetch(url + `api/exercise/imageinternal?id=${exercises[i]}`, req);
+
+        expect(res.status).toBe(utils.NOT_FOUND);
+    }
+});
+
+test('[AUTHORIZED] Get a exercise images internal [/api/exercise/imageinternal?id={string}&token={string}]', async () =>
+{
+    for(var i = 0; i < exercises.length; i++)
+    {
+        const req =
+        {
+            method: "GET",
+            headers:
+            {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const res = await fetch(url + `api/exercise/imageinternal?id=${exercises[i]}&token=${fpdfSecret}`, req);
+
+        expect(res.status).toBe(utils.OK);
+
+        const data = await res.blob();
+
+        //Hardcoded test
+        expect(data.size).toBeGreaterThan(100000);
+    }
+});
+
 test('[AUTHORIZED] Get a not found images [/api/exercise/image?id={string}]', async () =>
 {
     for(var i = 0; i < 20; i++)
@@ -317,7 +413,10 @@ test('[AUTHORIZED] Create plan [/api/plan]', async () =>
     for(var i = 0; i < createPlanCount; i++)
     {
         var randomExercises = [];
-        for(var j = 0; j < randomInt(2, Math.round(exercises.length / 2)); j++)
+        const createExCount = randomInt(2, Math.round(exercises.length / 2));
+        const randomizedId = createRandomizedId(exercises.length, 40);
+
+        for(var j = 0; j < createExCount; j++)
         {
             var sets = [];
             for(var k = 0; k < randomInt(1, 7); k++)
@@ -327,8 +426,9 @@ test('[AUTHORIZED] Create plan [/api/plan]', async () =>
                     'kg': randomInt(1, 100)
                 });
             }
+
             randomExercises.push({
-                'id': exercises[j],
+                'id': exercises[randomizedId[j]],
                 'sets': sets
             });
         }
@@ -413,7 +513,10 @@ test('[AUTHORIZED] Update plan [/api/plan]', async () =>
     {
         const id = plans[i];
         var randomExercises = [];
-        for(var j = 0; j < randomInt(2, Math.round(exercises.length / 2)); j++)
+        const createExCount = randomInt(2, Math.round(exercises.length / 2));
+        const randomizedId = createRandomizedId(exercises.length, 40);
+
+        for(var j = 0; j < createExCount; j++)
         {
             var sets = [];
             for(var k = 0; k < randomInt(1, 7); k++)
@@ -423,8 +526,9 @@ test('[AUTHORIZED] Update plan [/api/plan]', async () =>
                     'kg': randomInt(1, 100)
                 });
             }
+
             randomExercises.push({
-                'id': exercises[j],
+                'id': exercises[randomizedId[j]],
                 'sets': sets
             });
         }
@@ -496,7 +600,7 @@ test('[AUTHORIZED] Get plan data [/api/plan?id={string}]', async () =>
         expect(data).toHaveProperty('created_at');
         expect(data).toHaveProperty('modified_at');
         expect(data).toHaveProperty('exercises');
-
+        
         for(var j = 0; j < data.exercises.length; j++)
         {
             const item = data.exercises[j];
@@ -555,7 +659,10 @@ test('[AUTHORIZED] Create log [/api/log]', async () =>
     for(var i = 0; i < createLogCount; i++)
     {
         var randomExercises = [];
-        for(var j = 0; j < randomInt(2, Math.round(exercises.length / 2)); j++)
+        const createExCount = randomInt(2, Math.round(exercises.length / 2));
+        const randomizedId = createRandomizedId(exercises.length, 30);
+
+        for(var j = 0; j < createExCount; j++)
         {
             var sets = [];
             for(var k = 0; k < randomInt(1, 7); k++)
@@ -566,7 +673,7 @@ test('[AUTHORIZED] Create log [/api/log]', async () =>
                 });
             }
             randomExercises.push({
-                'id': exercises[j],
+                'id': exercises[randomizedId[j]],
                 'sets': sets
             });
         }
@@ -747,4 +854,84 @@ test('[UNAUTHORIZED] Get leaderboard data [/api/leaderboard]', async () =>
     const res = await fetch(url + 'api/leaderboard', req);
 
     expect(res.status).toBe(utils.UNAUTHORIZED);
+});
+
+test('[UNAUTHORIZED] Get plan PDF [/api/plan/pdf]', async () =>
+{
+    const req =
+    {
+        method: "GET",
+        headers:
+        {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const res = await fetch(url + `api/plan/pdf`, req);
+
+    expect(res.status).toBe(utils.UNAUTHORIZED);
+});
+    
+test('[UNAUTHORIZED] Get log PDF [/api/log/pdf]', async () =>
+{
+    const req =
+    {
+        method: "GET",
+        headers:
+        {
+            'Content-Type': 'application/json'
+        }
+    };
+
+    const res = await fetch(url + `api/log/pdf`, req);
+
+    expect(res.status).toBe(utils.UNAUTHORIZED);
+});
+
+test('[AUTHORIZED] Get plan PDF [/api/plan/pdf]', async () =>
+{
+    const req =
+    {
+        method: "GET",
+        headers:
+        {
+            'Content-Type': 'application/json'
+        }
+    };
+    if(use_cookie)
+    {
+        req.headers['Cookie'] = `token=${token};`;
+    }
+    else
+    {
+        req.headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const res = await fetch(url + `api/plan/pdf`, req);
+
+    expect(res.status).toBe(utils.OK);
+});
+
+test('[AUTHORIZED] Get log PDF [/api/log/pdf]', async () =>
+{
+    const req =
+    {
+        method: "GET",
+        headers:
+        {
+            'Content-Type': 'application/json'
+        }
+    };
+    if(use_cookie)
+    {
+        req.headers['Cookie'] = `token=${token};`;
+    }
+    else
+    {
+        req.headers['Authorization'] = `Bearer ${token}`;
+    }
+
+    const res = await fetch(url + `api/log/pdf`, req);
+
+    expect(res.status).toBe(utils.OK);
 });

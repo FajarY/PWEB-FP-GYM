@@ -2,6 +2,7 @@
 
 namespace University\GymJournal\Backend\Models;
 use University\GymJournal\Backend\App\DB;
+use University\GymJournal\Backend\App\Image;
 
 class ExercisesModel
 {
@@ -82,6 +83,25 @@ class ExercisesModel
         $output['display_image_type'] = $res[0]['display_image_type'];
 
         return true;
+    }
+    public static function getExercisesImagesTypeAcociative() : ?array
+    {
+        $res = DB::query(
+            'SELECT id, display_image_type FROM exercises', []
+        );
+
+        if($res === null)
+        {
+            return null;
+        }
+
+        $arr = [];
+        for($i = 0; $i < count($res); $i++)
+        {
+            $arr[$res[$i]['id']] = Image::getImageExtensionFromBinaryType($res[$i]['display_image_type']);
+        }
+
+        return $arr;
     }
 }
 
