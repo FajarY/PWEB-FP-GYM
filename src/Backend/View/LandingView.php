@@ -9,6 +9,6 @@ class LandingView extends View
 {
     public function render()
     {
-        HTTPUtils::sendHTML(200, file_get_contents(__DIR__.'/../../Frontend/Pages/LandingView.html'));
+        HTTPUtils::sendHTMLAtPublic(200, 'LandingView.html');
     }
 }

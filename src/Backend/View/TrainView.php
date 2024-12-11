@@ -8,7 +8,7 @@ class TrainView extends View
 {
     public function render()
     {
-        HTTPUtils::sendHTML(200, '/train');
+        HTTPUtils::sendHTMLAtPublic(200, 'Train.html');
     }
 }
 ?>
