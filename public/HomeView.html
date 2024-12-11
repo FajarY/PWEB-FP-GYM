@@ -5,130 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gym Journal</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fffcf5;
-    }
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: #f4e7d7;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .logo {
-      color: #c0936a;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-    nav a {
-      margin: 0 1rem;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-    nav a:hover {
-      color: #c0936a;
-    }
-    .profile {
-      display: flex;
-      align-items: center;
-    }
-    .profile-pic {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 0.5rem;
-    }
-    .container {
-      padding: 2rem;
-    }
-    h2 {
-      color: #333;
-      margin-bottom: 1rem;
-    }
-    .plans, .logs, .export-pdf {
-      margin-bottom: 2rem;
-    }
-    .plans h3, .logs h3, .export-pdf h3 {
-      color: #c0936a;
-      margin-bottom: 1rem;
-    }
-    .plan {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 0.5rem;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .add-btn {
-      display: block;
-      width: 100%;
-      padding: 0.8rem;
-      font-size: 1rem;
-      font-weight: bold;
-      color: white;
-      background-color: #c0936a;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 0.5rem;
-    }
-    .add-btn:hover {
-      background-color: #a77956;
-    }
-    .edit-btn, .delete-btn {
-      background: none;
-      border: none;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    .edit-btn:hover {
-      color: #4caf50;
-    }
-    .delete-btn:hover {
-      color: #f44336;
-    }
-    .logs {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 0.5rem;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .log {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 0.5rem;
-      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .chart-placeholder {
-      width: 100%;
-      height: 200px;
-      background-color: #e0dfdc;
-      border-radius: 8px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #6e6e6e;
-      font-weight: bold;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fffcf5;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f4e7d7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .logo {
+    color: #c0936a;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+  }
+  nav a:hover {
+    color: #c0936a;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+  .container {
+    padding: 2rem;
+  }
+  h2 {
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  .plans, .logs, .export-pdf {
+    margin-bottom: 2rem;
+  }
+  .plans h3, .logs h3, .export-pdf h3 {
+    color: #c0936a;
+    margin-bottom: 1rem;
+  }
+  .plan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .add-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: #c0936a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+  }
+  .add-btn:hover {
+    background-color: #a77956;
+  }
+  .edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .edit-btn:hover {
+    color: #4caf50;
+  }
+  .delete-btn:hover {
+    color: #f44336;
+  }
+  .logs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .log {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .chart-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #e0dfdc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6e6e6e;
+    font-weight: bold;
+  }
   </style>
   <link rel="stylesheet" href="/output.css" />
   <script type="module" defer src="./HomeView.js"></script>
@@ -144,12 +144,11 @@
 
   <div class="w-full p-8">
     <h2 class="text-2xl font-bold" id="welcome-name">Welcome </h2>
-    <div class="plans">
-      <h3 class="font-bold">Plans</h3>
+    <div class="">
+      <h3 class="font-bold mb-4 text-red-600">Plans</h3>
       <div id="plans-list">
-
       </div>
-      <button id="add-plan" class="add-btn">➕</button>
+      <button id="add-plan" class="add-btn mb-4">➕</button>
     </div>
     <div class="flex-row">
       <h3 class="mb-4 text-red-600 font-bold">Logs</h3>

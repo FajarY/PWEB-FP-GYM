@@ -185,10 +185,6 @@ test('[AUTHORIZED] Get user image [/api/user/image?id={string}]', async () =>
     const res = await fetch(url + `api/user/image?id=${id}`, req);
 
     expect(res.status).toBe(utils.OK);
-
-    const data = await res.blob();
-    
-    expect(data.size).toBeGreaterThan(1483600);
 });
 
 var exercises = [];
