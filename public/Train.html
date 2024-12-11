@@ -1,161 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Journal</title>
-  <link rel="stylesheet" href="css/Train.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f4e7d7;
-      padding: 1rem 2rem;
-    }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #c0936a;
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-    }
-    nav ul li {
-      margin-right: 1rem;
-      cursor: pointer;
-    }
-    .content {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .workout img {
-      width: 300px;
-      height: 200px;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-    .timer h2 {
-      margin-bottom: 0.5rem;
-    }
-    .controls {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-    }
-    .controls button {
-      margin: 0 1rem;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      background-color: #c0936a;
-      border: none;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .controls button:hover {
-      background-color: #a77956;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="logo">GYM JOURNAL</div>
-    <nav>
-      <ul>
-        <li>Home</li>
-        <li>Plan</li>
-        <li>Train</li>
-        <li>Leaderboard</li>
-        <li class="user-profile">
-          <img src="user-avatar.png" alt="User Avatar"> Lionel Messi
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <h1>New Training</h1>
-    <div class="content">
-      <div class="workout">
-        <img id="workout-img" src="workout-image.jpg" alt="Workout Image">
-        <p id="workout-name">Workout Name</p>
-      </div>
-      <div class="timer">
-        <h2>Timer</h2>
-        <p id="timer">60s</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/output.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Gym Journal</title>
+  </head>
+  <body class="font-baloo bg-cream">
+    <!-- Navbar -->
+    <div
+      class="h-[89px] w-full bg-cream flex items-center justify-between p-10"
+    >
+      <div class="logo-tan">GYM JOURNAL</div>
+      <div>
+        <div class="flex">
+          <a
+            href="/home"
+            class="p-2 m-3 font-medium text-[20px] cursor-pointer text-darkGray hover:text-darkGray/70"
+            >Home</a
+          >
+          <a
+            href="/plan"
+            class="p-2 m-3 font-medium text-[20px] cursor-pointer text-darkGray hover:text-darkGray/70"
+            >Plan</a
+          >
+          <a
+            href="/train"
+            class="p-2 m-3 font-medium text-[20px] cursor-pointer text-darkGray hover:text-darkGray/70 list-cur"
+            >Train</a
+          >
+          <a
+            href="/leaderboard"
+            class="p-2 m-3 font-medium text-[20px] cursor-pointer text-darkGray hover:text-darkGray/70"
+            >Leaderboard</a
+          >
+          <div class="flex items-center">
+            <div
+              class="ml-5 w-[50px] h-[50px] mr-4 rounded-full overflow-hidden"
+            >
+              <img
+                src="/Asset/Barbel.jpg"
+                alt="foto"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <p class="text-[18px]">{Nama}</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="controls">
-      <button class="prev">PREV</button>
-      <button class="next">NEXT</button>
+    <div class="h-auto w-full">
+      <!-- Mulai dari sini kotaknya -->
+      <div class="flex justify-center min-h-[440px] mb-10">
+        <div
+          class="h-auto mt-10 bg-tan w-[1200px] rounded-[20px] flex flex-row shadow-custom"
+        >
+          <!-- image -->
+          <div
+            class="flex w-[30%] justify-center mt-5 flex-col items-center px-10 pb-6"
+          >
+            <h1 class="text-cream text-[32px] font-bold text-shadow-lg">
+              {exercise}
+            </h1>
+            <div
+              class="relative w-[300px] h-[300px] flex justify-center items-center rounded-[20px]"
+            >
+              <!-- Foreground Image -->
+              <div
+                class="absolute z-10 rounded-[20px] overflow-hidden h-[272px] w-[272px] shadow-md"
+              >
+                <img
+                  src="/Asset/Landing View.jpg"
+                  alt="Exercise Image"
+                  class="h-full w-full object-cover opacity-80"
+                />
+              </div>
+              <!-- Background Offset -->
+              <div
+                class="absolute bg-cream h-[272px] w-[272px] rounded-[20px] top-[22px] left-[22px] z-0 shadow-custom"
+              ></div>
+            </div>
+          </div>
+          <div class="w-full mt-20 ml-10">
+            <div>
+              <!-- item 1 -->
+              <div
+                class="bg-cream h-[86px] w-[730px] rounded-[20px] flex items-center justify-between mb-5"
+              >
+                <!-- Kg -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Kg
+                  </p>
+                </div>
+                <!-- Reps -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Reps
+                  </p>
+                </div>
+                <!-- Checkbox -->
+                <div
+                  class="mr-6 flex items-center w-[70px] h-[55px] bg-tan justify-center rounded-[20px]"
+                >
+                  <input
+                    type="checkbox"
+                    class="w-[50px] h-[50px] bg-tan appearance-none rounded-[5px] cursor-pointer relative"
+                  />
+                </div>
+              </div>
+              <!-- item 2 -->
+              <div
+                class="bg-cream h-[86px] w-[730px] rounded-[20px] flex items-center justify-between mb-5"
+              >
+                <!-- Kg -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Kg
+                  </p>
+                </div>
+                <!-- Reps -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Reps
+                  </p>
+                </div>
+                <!-- Checkbox -->
+                <div
+                  class="mr-6 flex items-center w-[70px] h-[55px] bg-tan justify-center rounded-[20px]"
+                >
+                  <input
+                    type="checkbox"
+                    class="w-[50px] h-[50px] bg-tan appearance-none rounded-[5px] cursor-pointer relative"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Mulai dari sini kotaknya -->
+      <div class="flex justify-center min-h-[440px] mb-10">
+        <div
+          class="h-auto mt-10 bg-tan w-[1200px] rounded-[20px] flex flex-row shadow-custom"
+        >
+          <!-- image -->
+          <div
+            class="flex w-[30%] justify-center mt-5 flex-col items-center px-10 pb-6"
+          >
+            <h1 class="text-cream text-[32px] font-bold text-shadow-lg">
+              {exercise}
+            </h1>
+            <div
+              class="relative w-[300px] h-[300px] flex justify-center items-center rounded-[20px]"
+            >
+              <!-- Foreground Image -->
+              <div
+                class="absolute z-10 rounded-[20px] overflow-hidden h-[272px] w-[272px] shadow-md"
+              >
+                <img
+                  src="/Asset/Landing View.jpg"
+                  alt="Exercise Image"
+                  class="h-full w-full object-cover opacity-80"
+                />
+              </div>
+              <!-- Background Offset -->
+              <div
+                class="absolute bg-cream h-[272px] w-[272px] rounded-[20px] top-[22px] left-[22px] z-0 shadow-custom"
+              ></div>
+            </div>
+          </div>
+          <div class="w-full mt-20 ml-10">
+            <div>
+              <!-- item 1 -->
+              <div
+                class="bg-cream h-[86px] w-[730px] rounded-[20px] flex items-center justify-between mb-5"
+              >
+                <!-- Kg -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Kg
+                  </p>
+                </div>
+                <!-- Reps -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Reps
+                  </p>
+                </div>
+                <!-- Checkbox -->
+                <div
+                  class="mr-6 flex items-center w-[70px] h-[55px] bg-tan justify-center rounded-[20px]"
+                >
+                  <input
+                    type="checkbox"
+                    class="w-[50px] h-[50px] bg-tan appearance-none rounded-[5px] cursor-pointer relative"
+                  />
+                </div>
+              </div>
+              <!-- item 2 -->
+              <div
+                class="bg-cream h-[86px] w-[730px] rounded-[20px] flex items-center justify-between mb-5"
+              >
+                <!-- Kg -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Kg
+                  </p>
+                </div>
+                <!-- Reps -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Reps
+                  </p>
+                </div>
+                <!-- Checkbox -->
+                <div
+                  class="mr-6 flex items-center w-[70px] h-[55px] bg-tan justify-center rounded-[20px]"
+                >
+                  <input
+                    type="checkbox"
+                    class="w-[50px] h-[50px] bg-tan appearance-none rounded-[5px] cursor-pointer relative"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </main>
-
-  <script>
-    const workouts = [
-      { name: "Push-ups", image: "pushups.jpg" },
-      { name: "Squats", image: "squats.jpg" },
-      { name: "Burpees", image: "burpees.jpg" }
-    ];
-
-    let currentIndex = 0;
-    let timer = 60;
-    let timerInterval;
-
-    const workoutName = document.getElementById("workout-name");
-    const workoutImage = document.getElementById("workout-img");
-    const timerDisplay = document.getElementById("timer");
-
-    const prevButton = document.querySelector(".prev");
-    const nextButton = document.querySelector(".next");
-
-    function updateWorkout() {
-      workoutName.textContent = workouts[currentIndex].name;
-      workoutImage.src = workouts[currentIndex].image;
-      resetTimer();
-    }
-
-    function resetTimer() {
-      clearInterval(timerInterval);
-      timer = 60;
-      timerDisplay.textContent = `${timer}s`;
-      startTimer();
-    }
-
-    function startTimer() {
-      timerInterval = setInterval(() => {
-        timer--;
-        timerDisplay.textContent = `${timer}s`;
-        if (timer === 0) {
-          clearInterval(timerInterval);
-          if (currentIndex < workouts.length - 1) {
-            currentIndex++;
-            updateWorkout();
-          }
-        }
-      }, 1000);
-    }
-
-    prevButton.addEventListener("click", () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateWorkout();
-      }
-    });
-
-    nextButton.addEventListener("click", () => {
-      if (currentIndex < workouts.length - 1) {
-        currentIndex++;
-        updateWorkout();
-      }
-    });
-
-    // Initialize the first workout and start the timer
-    updateWorkout();
-  </script>
-</body>
+    <div class="flex justify-center items-center">
+      <div
+        class="btn-tan mb-32 mt-20 w-[780px] h-[90px] flex items-center justify-center text-[50px] cursor-pointer"
+      >
+        DONE
+      </div>
+    </div>
+  </body>
 </html>
