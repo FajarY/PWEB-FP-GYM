@@ -3,156 +3,284 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="output.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
     <title>Gym Journal</title>
-    <link rel="stylesheet" href="css/Plan.css" />
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-      }
-      header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #f4e7d7;
-        padding: 1rem 2rem;
-      }
-      .logo {
-        font-size: 1.5rem;
-        font-weight: bold;
-        color: #c0936a;
-      }
-      nav ul {
-        display: flex;
-        list-style: none;
-      }
-      nav ul li {
-        margin-right: 1rem;
-        cursor: pointer;
-      }
-      .content {
-        text-align: center;
-        margin-top: 2rem;
-      }
-      .workout-item {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
-      }
-      .workout-item span {
-        flex-grow: 1;
-        margin-left: 1rem;
-        font-size: 1.2rem;
-      }
-      .checklist {
-        margin-left: auto;
-        width: 20px;
-        height: 20px;
-        cursor: pointer;
-      }
-      .controls {
-        margin-top: 2rem;
-        display: flex;
-        justify-content: center;
-      }
-      .controls button {
-        margin: 0 1rem;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
-        background-color: #c0936a;
-        border: none;
-        color: white;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-      .controls button:hover {
-        background-color: #a77956;
-      }
-
-      .workout-img {
-        width: 100px;
-        height: 100px;
-        object-fit: cover; /* Ensures the image fits within the dimensions without distortion */
-        margin-right: 1rem;
-      }
-    </style>
   </head>
-  <body>
-    <div class="navbar">
-      <h1 class="logo">GYM JOURNAL</h1>
-      <nav>
-        <a href="#">Home</a>
-        <a href="#">Plan</a>
-        <a href="#">Train</a>
-        <a href="#">Leaderboard</a>
-      </nav>
-      <div class="profile">
-        <img src="profile-placeholder.jpg" alt="Profile" class="profile-pic" />
-        <span class="profile-name">Lionel Messi</span>
-      </div>
-    </div>
-
+  <body class="font-baloo bg-cream">
+    <!-- Navbar -->
     <div
-      class="workout-container"
-      style="
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-      "
+      class="h-[89px] w-full bg-cream flex items-center justify-between p-10"
     >
-      <h2 contenteditable="true" id="plan-name">{Plan Name}</h2>
-      <!-- Editable Plan Name -->
-      <div class="workout-section">
-        <div class="workout-list" style="width: 40rem">
-          <h3 contenteditable="true" id="muscle-name">{Muscle}</h3>
-          <!-- Editable Muscle -->
-
-          <!-- Editable Workout Items -->
-          <div class="workout-item">
-            <img src="../Asset/Barbel.jpg" alt="Workout" class="workout-img" />
-            <span contenteditable="true">{Workout 1}</span>
-            <input type="checkbox" class="checklist" />
-          </div>
-          <div class="workout-item">
-            <img src="../Asset/Barbel.jpg" alt="Workout" class="workout-img" />
-            <span contenteditable="true">{Workout 2}</span>
-            <input type="checkbox" class="checklist" />
-          </div>
-          <div class="workout-item">
-            <img src="../Asset/Barbel.jpg" alt="Workout" class="workout-img" />
-            <span contenteditable="true">{Workout 3}</span>
-            <input type="checkbox" class="checklist" />
+      <div class="logo-tan">GYM JOURNAL</div>
+      <div>
+        <div class="flex">
+          <a class="p-2 m-3 font-medium text-[20px] cursor-pointer">Home</a>
+          <a class="p-2 m-3 font-medium text-[20px] cursor-pointer">Plan</a>
+          <a class="p-2 m-3 font-medium text-[20px] cursor-pointer">Train</a>
+          <a class="p-2 m-3 font-medium text-[20px] cursor-pointer"
+            >Leaderboard</a
+          >
+          <div class="flex items-center">
+            <div
+              class="ml-5 w-[50px] h-[50px] mr-4 rounded-full overflow-hidden"
+            >
+              <img
+                src="Asset/Barbel.jpg"
+                alt="foto"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <p class="text-[18px]">{Nama}</p>
           </div>
         </div>
       </div>
-
-      <!-- Done Button -->
-      <button class="done-btn" onclick="saveWorkoutPlan()">DONE</button>
     </div>
-
-    <script>
-      // Save workout plan (could be expanded to save to a database or localStorage)
-      function saveWorkoutPlan() {
-        const planName = document.getElementById("plan-name").innerText;
-        const muscleName = document.getElementById("muscle-name").innerText;
-        const workoutItems = Array.from(
-          document.querySelectorAll(".workout-item")
-        ).map((item) => {
-          return {
-            workout: item.querySelector("span").innerText,
-            checked: item.querySelector(".checklist").checked,
-          };
-        });
-
-        // For demo purposes, we'll log the data to the console
-        console.log({
-          planName,
-          muscleName,
-          workoutItems,
-        });
-
-        alert("Workout Plan Saved!");
-      }
-    </script>
+    <div class="h-auto w-full">
+      <!-- Mulai dari sini kotaknya -->
+      <div class="flex justify-center min-h-[440px] mb-10">
+        <div
+          class="h-auto mt-10 bg-tan w-[1200px] rounded-[20px] flex flex-row shadow-custom"
+        >
+          <!-- image -->
+          <div
+            class="flex w-[30%] justify-center mt-5 flex-col items-center px-10 pb-6"
+          >
+            <h1 class="text-cream text-[32px] font-bold text-shadow-lg">
+              {exercise}
+            </h1>
+            <div
+              class="relative w-[300px] h-[300px] flex justify-center items-center rounded-[20px]"
+            >
+              <!-- Foreground Image -->
+              <div
+                class="absolute z-10 rounded-[20px] overflow-hidden h-[272px] w-[272px] shadow-md"
+              >
+                <img
+                  src="Asset/Landing View.jpg"
+                  alt="Exercise Image"
+                  class="h-full w-full object-cover opacity-80"
+                />
+              </div>
+              <!-- Background Offset -->
+              <div
+                class="absolute bg-cream h-[272px] w-[272px] rounded-[20px] top-[22px] left-[22px] z-0 shadow-custom"
+              ></div>
+            </div>
+          </div>
+          <div class="w-full mt-20 ml-10">
+            <div>
+              <!-- item 1 -->
+              <div
+                class="bg-cream h-[86px] w-[730px] rounded-[20px] flex items-center justify-between mb-5"
+              >
+                <!-- Kg -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Kg
+                  </p>
+                </div>
+                <!-- Reps -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Reps
+                  </p>
+                </div>
+                <!-- Checkbox -->
+                <div
+                  class="mr-6 flex items-center w-[70px] h-[55px] bg-tan justify-center rounded-[20px]"
+                >
+                  <input
+                    type="checkbox"
+                    class="w-[50px] h-[50px] bg-tan appearance-none rounded-[5px] cursor-pointer relative"
+                  />
+                </div>
+              </div>
+              <!-- item 2 -->
+              <div
+                class="bg-cream h-[86px] w-[730px] rounded-[20px] flex items-center justify-between mb-5"
+              >
+                <!-- Kg -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Kg
+                  </p>
+                </div>
+                <!-- Reps -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Reps
+                  </p>
+                </div>
+                <!-- Checkbox -->
+                <div
+                  class="mr-6 flex items-center w-[70px] h-[55px] bg-tan justify-center rounded-[20px]"
+                >
+                  <input
+                    type="checkbox"
+                    class="w-[50px] h-[50px] bg-tan appearance-none rounded-[5px] cursor-pointer relative"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Mulai dari sini kotaknya -->
+      <div class="flex justify-center min-h-[440px] mb-10">
+        <div
+          class="h-auto mt-10 bg-tan w-[1200px] rounded-[20px] flex flex-row shadow-custom"
+        >
+          <!-- image -->
+          <div
+            class="flex w-[30%] justify-center mt-5 flex-col items-center px-10 pb-6"
+          >
+            <h1 class="text-cream text-[32px] font-bold text-shadow-lg">
+              {exercise}
+            </h1>
+            <div
+              class="relative w-[300px] h-[300px] flex justify-center items-center rounded-[20px]"
+            >
+              <!-- Foreground Image -->
+              <div
+                class="absolute z-10 rounded-[20px] overflow-hidden h-[272px] w-[272px] shadow-md"
+              >
+                <img
+                  src="Asset/Landing View.jpg"
+                  alt="Exercise Image"
+                  class="h-full w-full object-cover opacity-80"
+                />
+              </div>
+              <!-- Background Offset -->
+              <div
+                class="absolute bg-cream h-[272px] w-[272px] rounded-[20px] top-[22px] left-[22px] z-0 shadow-custom"
+              ></div>
+            </div>
+          </div>
+          <div class="w-full mt-20 ml-10">
+            <div>
+              <!-- item 1 -->
+              <div
+                class="bg-cream h-[86px] w-[730px] rounded-[20px] flex items-center justify-between mb-5"
+              >
+                <!-- Kg -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Kg
+                  </p>
+                </div>
+                <!-- Reps -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Reps
+                  </p>
+                </div>
+                <!-- Checkbox -->
+                <div
+                  class="mr-6 flex items-center w-[70px] h-[55px] bg-tan justify-center rounded-[20px]"
+                >
+                  <input
+                    type="checkbox"
+                    class="w-[50px] h-[50px] bg-tan appearance-none rounded-[5px] cursor-pointer relative"
+                  />
+                </div>
+              </div>
+              <!-- item 2 -->
+              <div
+                class="bg-cream h-[86px] w-[730px] rounded-[20px] flex items-center justify-between mb-5"
+              >
+                <!-- Kg -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Kg
+                  </p>
+                </div>
+                <!-- Reps -->
+                <div class="h-full flex items-center">
+                  <div
+                    class="bg-tan w-[150px] h-[55px] rounded-[20px] ml-6 flex justify-center items-center font-bold text-[24px] text-cream text-shadow-lg"
+                  >
+                    {value}
+                  </div>
+                  <p
+                    class="text-[32px] font-bold text-darkGray ml-5 text-shadow-lg"
+                  >
+                    Reps
+                  </p>
+                </div>
+                <!-- Checkbox -->
+                <div
+                  class="mr-6 flex items-center w-[70px] h-[55px] bg-tan justify-center rounded-[20px]"
+                >
+                  <input
+                    type="checkbox"
+                    class="w-[50px] h-[50px] bg-tan appearance-none rounded-[5px] cursor-pointer relative"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center items-center">
+      <div
+        class="btn-tan mb-32 mt-20 w-[780px] h-[90px] flex items-center justify-center text-[50px] cursor-pointer"
+      >
+        DONE
+      </div>
+    </div>
   </body>
 </html>

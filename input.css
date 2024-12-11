@@ -35,4 +35,14 @@
   .btn-cream {
     @apply p-4 bg-cream text-tan font-baloo rounded-3xl font-bold shadow-custom text-center hover:bg-cream/90 hover:text-tan/80 hover:-translate-y-1 transition;
   }
+
+  input[type="checkbox"]:checked::after {
+    content: "✔";
+    font-size: 24px;
+    color: #5f5954;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
