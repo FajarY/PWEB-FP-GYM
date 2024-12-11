@@ -5,24 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Workout Plan</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: Arial, sans-serif;
+      background-color: #fffcf5;
     }
     .navbar {
-      background-color: #333;
-      color: white;
-      padding: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 1rem 2rem;
+      background-color: #f4e7d7;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-    .navbar .logo {
-      font-size: 24px;
+    .logo {
+      color: #c0936a;
+      font-size: 1.5rem;
+      font-weight: bold;
     }
-    .navbar nav a {
-      color: white;
+    nav a {
+      margin: 0 1rem;
       text-decoration: none;
-      margin: 0 15px;
+      color: #333;
+      font-weight: bold;
+    }
+    nav a:hover {
+      color: #c0936a;
     }
     .profile {
       display: flex;
@@ -32,53 +44,62 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      margin-right: 10px;
+      margin-right: 0.5rem;
     }
     .workout-container {
-      margin: 20px;
+      padding: 2rem;
+    }
+    h2, h3 {
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    #plan-name {
+      color: #c0936a;
+      font-size: 1.5rem;
+      font-weight: bold;
     }
     .workout-list {
-      border: 1px solid #ccc;
-      padding: 10px;
+      background: #ffffff;
       border-radius: 8px;
-      margin-bottom: 20px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
     .workout-item {
       display: flex;
       align-items: center;
-      margin: 10px 0;
       gap: 10px;
+      margin: 10px 0;
     }
     .workout-item input {
       width: 60px;
       padding: 5px;
       text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
-    .workout-item button {
-      background-color: #f44336;
+    .workout-item button, .add-workout-btn, .add-section-btn, .done-btn {
+      background-color: #c0936a;
       color: white;
       border: none;
-      cursor: pointer;
-      padding: 5px 10px;
-      font-size: 16px;
-    }
-    .add-workout-btn, .add-section-btn {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
+      border-radius: 8px;
       cursor: pointer;
       padding: 10px;
-      font-size: 16px;
-      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .workout-item button:hover, .add-workout-btn:hover, .add-section-btn:hover, .done-btn:hover {
+      background-color: #a77956;
     }
     .done-btn {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
       margin-top: 20px;
+      padding: 10px 20px;
+    }
+    #workout-dropdown {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
     }
   </style>
 </head>
@@ -98,7 +119,7 @@
   </div>
 
   <div class="workout-container">
-    <h2 contenteditable="true" id="plan-name">My Plan</h2>
+    <h2 id="plan-name" contenteditable="true">My Plan</h2>
     <div id="workout-sections"></div>
     <select id="workout-dropdown">
       <option value="Squat">Squat</option>
@@ -137,23 +158,11 @@
       });
     }
 
-    function updateDropdown() {
-      const dropdown = document.getElementById('workout-dropdown');
-      const availableWorkouts = ['Squat', 'Bench Press', 'Deadlift', 'Overhead Press', 'Pull-Up'];
-      const usedWorkouts = workoutPlan.map(section => section.name);
-
-      dropdown.innerHTML = availableWorkouts
-        .filter(workout => !usedWorkouts.includes(workout))
-        .map(workout => `<option value="${workout}">${workout}</option>`)
-        .join('');
-    }
-
     function addSection() {
       const workoutDropdown = document.getElementById('workout-dropdown');
       const selectedWorkout = workoutDropdown.value;
       workoutPlan.push({ name: selectedWorkout, sets: [] });
       renderSections();
-      updateDropdown();
     }
 
     function addSet(sectionIndex) {
@@ -162,10 +171,8 @@
     }
 
     function deleteSection(sectionIndex) {
-      const removedWorkout = workoutPlan[sectionIndex].name;
       workoutPlan.splice(sectionIndex, 1);
       renderSections();
-      updateDropdown();
     }
 
     function deleteSet(sectionIndex, setIndex) {
@@ -180,7 +187,6 @@
 
     document.getElementById('add-section-btn').addEventListener('click', addSection);
     renderSections();
-    updateDropdown();
   </script>
 </body>
 </html>
