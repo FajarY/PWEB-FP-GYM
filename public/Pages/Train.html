@@ -1,161 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Journal</title>
-  <link rel="stylesheet" href="css/Train.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f4e7d7;
-      padding: 1rem 2rem;
-    }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #c0936a;
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-    }
-    nav ul li {
-      margin-right: 1rem;
-      cursor: pointer;
-    }
-    .content {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    .workout img {
-      width: 300px;
-      height: 200px;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-    }
-    .timer h2 {
-      margin-bottom: 0.5rem;
-    }
-    .controls {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-    }
-    .controls button {
-      margin: 0 1rem;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
-      background-color: #c0936a;
-      border: none;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    .controls button:hover {
-      background-color: #a77956;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="logo">GYM JOURNAL</div>
-    <nav>
-      <ul>
-        <li>Home</li>
-        <li>Plan</li>
-        <li>Train</li>
-        <li>Leaderboard</li>
-        <li class="user-profile">
-          <img src="user-avatar.png" alt="User Avatar"> Lionel Messi
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <h1>New Training</h1>
-    <div class="content">
-      <div class="workout">
-        <img id="workout-img" src="workout-image.jpg" alt="Workout Image">
-        <p id="workout-name">Workout Name</p>
-      </div>
-      <div class="timer">
-        <h2>Timer</h2>
-        <p id="timer">60s</p>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gym Journal</title>
+    <link rel="stylesheet" href="css/Plan.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f4e7d7;
+        padding: 1rem 2rem;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #c0936a;
+      }
+      nav ul {
+        display: flex;
+        list-style: none;
+      }
+      nav ul li {
+        margin-right: 1rem;
+        cursor: pointer;
+      }
+      .content {
+        text-align: center;
+        margin-top: 2rem;
+      }
+      .workout-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      .workout-item span {
+        flex-grow: 1;
+        margin-left: 1rem;
+        font-size: 1.2rem;
+      }
+      .checklist {
+        margin-left: auto;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+      .controls {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+      }
+      .controls button {
+        margin: 0 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background-color: #c0936a;
+        border: none;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .controls button:hover {
+        background-color: #a77956;
+      }
+
+      .workout-img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover; /* Ensures the image fits within the dimensions without distortion */
+        margin-right: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <h1 class="logo">GYM JOURNAL</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Plan</a>
+        <a href="#">Train</a>
+        <a href="#">Leaderboard</a>
+      </nav>
+      <div class="profile">
+        <img src="profile-placeholder.jpg" alt="Profile" class="profile-pic" />
+        <span class="profile-name">Lionel Messi</span>
       </div>
     </div>
-    <div class="controls">
-      <button class="prev">PREV</button>
-      <button class="next">NEXT</button>
+
+    <div
+      class="workout-container"
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      "
+    >
+      <h2 contenteditable="true" id="plan-name">{Plan Name}</h2>
+      <!-- Editable Plan Name -->
+      <div class="workout-section">
+        <div class="workout-list" style="width: 40rem">
+          <h3 contenteditable="true" id="muscle-name">{Muscle}</h3>
+          <!-- Editable Muscle -->
+
+          <!-- Editable Workout Items -->
+          <div class="workout-item">
+            <img src="../Asset/Barbel.jpg" alt="Workout" class="workout-img" />
+            <span contenteditable="true">{Workout 1}</span>
+            <input type="checkbox" class="checklist" />
+          </div>
+          <div class="workout-item">
+            <img src="../Asset/Barbel.jpg" alt="Workout" class="workout-img" />
+            <span contenteditable="true">{Workout 2}</span>
+            <input type="checkbox" class="checklist" />
+          </div>
+          <div class="workout-item">
+            <img src="../Asset/Barbel.jpg" alt="Workout" class="workout-img" />
+            <span contenteditable="true">{Workout 3}</span>
+            <input type="checkbox" class="checklist" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Done Button -->
+      <button class="done-btn" onclick="saveWorkoutPlan()">DONE</button>
     </div>
-  </main>
 
-  <script>
-    const workouts = [
-      { name: "Push-ups", image: "pushups.jpg" },
-      { name: "Squats", image: "squats.jpg" },
-      { name: "Burpees", image: "burpees.jpg" }
-    ];
+    <script>
+      // Save workout plan (could be expanded to save to a database or localStorage)
+      function saveWorkoutPlan() {
+        const planName = document.getElementById("plan-name").innerText;
+        const muscleName = document.getElementById("muscle-name").innerText;
+        const workoutItems = Array.from(
+          document.querySelectorAll(".workout-item")
+        ).map((item) => {
+          return {
+            workout: item.querySelector("span").innerText,
+            checked: item.querySelector(".checklist").checked,
+          };
+        });
 
-    let currentIndex = 0;
-    let timer = 60;
-    let timerInterval;
+        // For demo purposes, we'll log the data to the console
+        console.log({
+          planName,
+          muscleName,
+          workoutItems,
+        });
 
-    const workoutName = document.getElementById("workout-name");
-    const workoutImage = document.getElementById("workout-img");
-    const timerDisplay = document.getElementById("timer");
-
-    const prevButton = document.querySelector(".prev");
-    const nextButton = document.querySelector(".next");
-
-    function updateWorkout() {
-      workoutName.textContent = workouts[currentIndex].name;
-      workoutImage.src = workouts[currentIndex].image;
-      resetTimer();
-    }
-
-    function resetTimer() {
-      clearInterval(timerInterval);
-      timer = 60;
-      timerDisplay.textContent = `${timer}s`;
-      startTimer();
-    }
-
-    function startTimer() {
-      timerInterval = setInterval(() => {
-        timer--;
-        timerDisplay.textContent = `${timer}s`;
-        if (timer === 0) {
-          clearInterval(timerInterval);
-          if (currentIndex < workouts.length - 1) {
-            currentIndex++;
-            updateWorkout();
-          }
-        }
-      }, 1000);
-    }
-
-    prevButton.addEventListener("click", () => {
-      if (currentIndex > 0) {
-        currentIndex--;
-        updateWorkout();
+        alert("Workout Plan Saved!");
       }
-    });
-
-    nextButton.addEventListener("click", () => {
-      if (currentIndex < workouts.length - 1) {
-        currentIndex++;
-        updateWorkout();
-      }
-    });
-
-    // Initialize the first workout and start the timer
-    updateWorkout();
-  </script>
-</body>
+    </script>
+  </body>
 </html>
