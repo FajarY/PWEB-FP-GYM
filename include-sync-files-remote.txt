@@ -1,0 +1,15 @@
++ configs/***
++ database/***
++ Dockerfile/***
++ public/***
++ src/***
++ .env
++ composer.json
++ composer.lock
++ deploy.sh
++ docker-compose.yaml
++ input.css
++ package-lock.json
++ package.json
++ tailwind.config.js
+- *

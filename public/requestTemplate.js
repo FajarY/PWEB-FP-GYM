@@ -116,7 +116,7 @@ async function getWorkoutPlanData(id)
 {
     const req =
     {
-        method: "PUT",
+        method: "GET",
         headers:
         {
             'Content-Type': 'application/json'

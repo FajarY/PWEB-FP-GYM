@@ -180,7 +180,11 @@ class LogAPIController extends Controller
 
                 $pdf->SetX($startCursor);
                 $pdf->SetY($beforeImageY, false);
-
+                
+                if($setsCount == 0)
+                {
+                    $pdf->Cell(97, $defaultHeight, '-', 1, 1, 'C');
+                }
                 for($j = 0; $j < $setsCount; $j++)
                 {
                     $height = 14;
