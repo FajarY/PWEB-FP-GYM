@@ -7,6 +7,8 @@ const workoutDropdown = document.getElementById('workout-dropdown');
 const addExerciseButton = document.getElementById('add-section-btn');
 const doneButton = document.getElementById('done-btn');
 const workoutSections = document.getElementById('workout-sections');
+const profileDisplay = document.getElementById('profile-display');
+const profileName = document.getElementById('profile-name');
 
 var exerciseHeadersRaw = [];
 var exerciseHeaders = [];
@@ -160,6 +162,18 @@ async function intialize()
         return;
     }
 
+    const me = await reqUtils.me();
+    if(me != null && me[0].status == httpUtils.OK)
+    {
+        profileName.textContent = me[1].username.split(' ')[0].substring(0, 10);
+        profileDisplay.src = `/api/user/image?id=${me[1].id}`;
+    }
+    else
+    {
+        alert("Error when initializing!");
+        window.location.href = '/home?failedit=true';
+    }
+
     exerciseHeadersRaw = exRes[1].exercises;
     var temp = [];
     for(var i = 0; i < exerciseHeadersRaw.length; i++)
@@ -201,8 +215,10 @@ function renderInputs()
         addedExercises[exercise.id] = true;
         var sectionString = `
         <div class="workout-list">
+            <div class="flex flex-row">
+            <div>
             <h3>${exerciseHeaders[exercise.id]}</h3>
-            <button id="${exercise.id}-delete">🗑️ Delete Section</button>
+            <button id="${exercise.id}-delete" class="mb-2">🗑️ Delete Section</button>
         `;
         
         const sets = exercise.sets;
@@ -210,14 +226,16 @@ function renderInputs()
         {
             sectionString += `
             <div class="workout-item">
-                <span>Set</span>
+                <span>KG</span>
                 <input id="${exercise.id}-kg-${j}" type="number" value="${sets[j].kg}" min="1" placeholder="kg">
+                <span>Reps</span>
                 <input id="${exercise.id}-reps-${j}" type="number" value="${sets[j].reps}" min="1" placeholder="reps">
-                <button id="${exercise.id}-set-del-${j}">❌ Delete</button>
+                <button id="${exercise.id}-set-del-${j}" class="mb-2">❌ Delete</button>
             </div>
             `
         }
-        sectionString += `<button id="${exercise.id}-add-set" class="add-workout-btn">➕ Add Set</button>`;
+        sectionString += `</div><img class="ml-auto" style="width: 200px; height: 200px;" src="/api/exercise/image?id=${exercise.id}"></div>`;
+        sectionString += `<br><button id="${exercise.id}-add-set" class="add-workout-btn w-full">➕ Add Set</button>`;
         sectionString += `</div>`;
         workoutSections.innerHTML += sectionString;
     }

@@ -154,7 +154,7 @@ async function getWorkoutPlanHeaders()
     return await tryFetchJson(`/api/plan/headers`, req);
 }
 
-async function createWorkoutLog(id, name, exercises, workout_time)
+async function createWorkoutLog(name, exercises, workout_time)
 {
     const req =
     {

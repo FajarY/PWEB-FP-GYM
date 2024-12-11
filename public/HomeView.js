@@ -5,6 +5,8 @@ const welcomeName = document.getElementById('welcome-name');
 const plansList = document.getElementById('plans-list');
 const addPlanButton = document.getElementById('add-plan');
 const logList = document.getElementById('log-list');
+const profileDisplay = document.getElementById('profile-display');
+const profileName = document.getElementById('profile-name');
 
 var meInitialized = false;
 var planInitialized = false;
@@ -36,6 +38,8 @@ async function initialize()
         if(me != null && me[0].status == httpUtils.OK)
         {
             welcomeName.innerHTML = `Welcome ${me[1].username}!`;
+            profileName.textContent = me[1].username.split(' ')[0].substring(0, 10);
+            profileDisplay.src = `/api/user/image?id=${me[1].id}`;
             meInitialized = true;
         }
     }
@@ -77,12 +81,12 @@ function rebuildPlans(data)
     {
         const now = data[i];
         var item = `
-        <div class="plan">
-          <span>${now.name}</span>
-          <span>Last modified at: ${now.modified_at}</span>
-          <button class="edit-btn" onclick='window.location.href="/train?id=${now.id}"'>Start</button>
-          <button class="edit-btn" onclick='window.location.href="/plan?id=${now.id}"'>✏️</button>
-          <button id='del-${now.id}' class="delete-btn")'>🗑️</button>
+        <div class="plan bg-white">
+          <span class="w-1/3">${now.name}</span>
+          <span class="w-1/3">Last modified at: ${now.modified_at}</span>
+          <button class="edit-btn ml-auto" onclick='window.location.href="/train?id=${now.id}"'>Start</button>
+          <button class="edit-btn ml-10" onclick='window.location.href="/plan?id=${now.id}"'>✏️</button>
+          <button class="ml-10" id='del-${now.id}' class="delete-btn")'>🗑️</button>
         </div>
         `;
 

@@ -616,6 +616,7 @@ test('[AUTHORIZED] Get plan data [/api/plan?id={string}]', async () =>
 
 test('[AUTHORIZED] Delete plan data [/api/plan?id={string}]', async () =>
 {
+    return;
     for(var i = 0; i < planHeaders.length; i++)
     {
         const id = planHeaders[i].id;

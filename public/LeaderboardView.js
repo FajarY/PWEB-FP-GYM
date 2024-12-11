@@ -4,12 +4,26 @@ import * as httpUtils from './requestUtils.js';
 const topLeaders = document.getElementById('top-leaders');
 const topLeadersSecondary = document.getElementById('top-leaders-secondary');
 const otherLeaders = document.getElementById('other-leaders');
+const profileDisplay = document.getElementById('profile-display');
+const profileName = document.getElementById('profile-name');
 
 var leaderboardLoaded = false;
 var leaderboardData = [];
+var meLoaded = false;
 
 async function buildData()
 {
+    if(!meLoaded)
+    {
+        const me = await reqUtils.me();
+        if(me != null && me[0].status == httpUtils.OK)
+        {
+            profileName.textContent = me[1].username.split(' ')[0].substring(0, 10);
+            profileDisplay.src = `/api/user/image?id=${me[1].id}`;
+            meLoaded = true;
+        }
+    }
+
     if(!leaderboardLoaded)
     {
         const res = await reqUtils.getLeaderboardData();
@@ -69,7 +83,7 @@ async function buildData()
         }
     }
 
-    if(!leaderboardLoaded)
+    if(!leaderboardLoaded || !meLoaded)
     {
         setTimeout(() => {
             buildData();
