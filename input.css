@@ -45,4 +45,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .list-cur {
+    @apply border-b-[4px] border-b-darkGray;
+  }
 }

@@ -8,7 +8,7 @@ class LeaderboardView extends View
 {
     public function render()
     {
-        HTTPUtils::sendHTML(200, '/leaderboard');
+        HTTPUtils::sendHTMLAtPublic(200, 'Leaderboard.html');
     }
 }
 ?>

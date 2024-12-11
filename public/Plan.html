@@ -1,243 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Workout Plan</title>
-  <link rel="stylesheet" href="css/Plan.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-
-    .navbar {
-      background-color: #333;
-      color: white;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .navbar .logo {
-      font-size: 24px;
-    }
-
-    .navbar nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0 15px;
-    }
-
-    .profile {
-      display: flex;
-      align-items: center;
-    }
-
-    .profile img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-
-    .workout-container {
-      margin: 20px;
-    }
-
-    .workout-section {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .workout-list {
-      max-width: 500px;
-      width: 100%;
-    }
-
-    .workout-item {
-      display: flex;
-      align-items: center;
-      margin: 10px 0;
-      gap: 10px;
-    }
-
-    .workout-item input {
-      width: 60px;
-      padding: 5px;
-      margin-right: 10px;
-      text-align: center;
-    }
-
-    .workout-item button {
-      background-color: #f44336;
-      color: white;
-      border: none;
-      cursor: pointer;
-      padding: 5px 10px;
-      font-size: 16px;
-    }
-
-    .workout-item button:hover {
-      background-color: #e53935;
-    }
-
-    #add-workout-btn {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 20px;
-    }
-
-    #add-workout-btn:hover {
-      background-color: #45a049;
-    }
-
-    .upload-photo {
-      margin-left: 20px;
-    }
-
-    .upload-file-input {
-      display: none;
-    }
-
-    .done-btn {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    .done-btn:hover {
-      background-color: #45a049;
-    }
-  </style>
-</head>
-<body>
-  <div class="navbar">
-    <h1 class="logo">GYM JOURNAL</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Plan</a>
-      <a href="#">Train</a>
-      <a href="#">Leaderboard</a>
-    </nav>
-    <div class="profile">
-      <img src="profile-placeholder.jpg" alt="Profile" class="profile-pic">
-      <span>Lionel Messi</span>
-    </div>
-  </div>
-
-  <div class="workout-container">
-    <h2 contenteditable="true" id="plan-name">{Plan Name}</h2> <!-- Editable Plan Name -->
-    <div class="workout-section">
-      <div class="workout-list">
-        <h3 contenteditable="true" id="muscle-name">{Muscle}</h3> <!-- Editable Muscle -->
-        
-        <!-- Editable Workout Items -->
-        <div class="workout-item">
-          <span contenteditable="true">{workout 1}</span>
-          <input type="number" class="kg-input" placeholder="kg" min="1">
-          <input type="number" class="reps-input" placeholder="reps" min="1">
-          <button class="delete-btn">❌ Delete</button>
-        </div>
-        <div class="workout-item">
-          <span contenteditable="true">{workout 2}</span>
-          <input type="number" class="kg-input" placeholder="kg" min="1">
-          <input type="number" class="reps-input" placeholder="reps" min="1">
-          <button class="delete-btn">❌ Delete</button>
-        </div>
-        <div class="workout-item">
-          <span contenteditable="true">{workout 3}</span>
-          <input type="number" class="kg-input" placeholder="kg" min="1">
-          <input type="number" class="reps-input" placeholder="reps" min="1">
-          <button class="delete-btn">❌ Delete</button>
-        </div>
-        
-        <!-- Button to Add New Workout Item -->
-        <button id="add-workout-btn">➕ Add New Workout</button>
-      </div>
-
-      <div class="upload-photo">
-        <div class="photo-box">
-          <span class="upload-icon">⬆️</span>
-          <p>Pick your photo here</p>
-          <!-- File Upload Input -->
-          <input type="file" id="upload-file" class="upload-file-input">
-        </div>
-      </div>
-    </div>
-    
-    <!-- Done Button -->
-    <button class="done-btn" onclick="saveWorkoutPlan()">DONE</button>
-  </div>
-
-  <script>
-    // Adding new workout item dynamically
-    document.getElementById('add-workout-btn').addEventListener('click', function() {
-      const workoutList = document.querySelector('.workout-list');
-      const newWorkoutItem = document.createElement('div');
-      newWorkoutItem.classList.add('workout-item');
-      newWorkoutItem.innerHTML = `
-        <span contenteditable="true">{new workout}</span>
-        <input type="number" class="kg-input" placeholder="kg" min="1">
-        <input type="number" class="reps-input" placeholder="reps" min="1">
-        <button class="delete-btn">❌ Delete</button>
-      `;
-      workoutList.appendChild(newWorkoutItem);
-      
-      // Attach delete functionality to new workout items
-      attachDeleteButton(newWorkoutItem);
-    });
-
-    // Function to attach delete functionality to a workout item
-    function attachDeleteButton(workoutItem) {
-      const deleteButton = workoutItem.querySelector('.delete-btn');
-      deleteButton.addEventListener('click', function() {
-        workoutItem.remove();
-      });
-    }
-
-    // Attach delete functionality to initial workout items
-    document.querySelectorAll('.workout-item').forEach(item => {
-      attachDeleteButton(item);
-    });
-
-    // Handling file upload
-    document.getElementById('upload-file').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        alert('File selected: ' + file.name);  // You can further handle the file upload here
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/output.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Workout Plan</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-    });
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #fefae0;
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: #f4e7d7;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .logo {
+        color: #d4a373;
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      nav a {
+        margin: 0 1rem;
+        text-decoration: none;
+        color: #5f5954;
+        font-weight: bold;
+      }
+      nav a:hover {
+        color: #d4a373;
+      }
+      .profile {
+        display: flex;
+        align-items: center;
+      }
+      .profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+      }
+      .workout-container {
+        padding: 2rem;
+      }
+      h2,
+      h3 {
+        color: #5f5954;
+        margin-bottom: 1rem;
+      }
+      .workout-list {
+        background: #fefae0;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      .workout-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 10px 0;
+      }
+      .workout-item input {
+        width: 60px;
+        padding: 5px;
+        text-align: center;
+        border: 1px solid #fefae0;
+        border-radius: 4px;
+      }
+      .workout-item button,
+      .add-workout-btn,
+      .add-section-btn,
+      .done-btn {
+        background-color: #d4a373;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .workout-item button:hover,
+      .add-workout-btn:hover,
+      .add-section-btn:hover,
+      .done-btn:hover {
+        background-color: #a77956;
+      }
+      .done-btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+      }
+      #workout-dropdown {
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div
+      class="h-[89px] w-full bg-cream flex items-center justify-between p-10"
+    >
+      <div class="logo-tan">GYM JOURNAL</div>
+      <div>
+        <div class="flex">
+          <a
+            href="/home"
+            class="p-2 m-3 font-medium text-[20px] cursor-pointer text-darkGray hover:text-darkGray/70"
+            >Home</a
+          >
+          <a
+            href="/plan"
+            class="p-2 m-3 font-medium text-[20px] cursor-pointer text-darkGray hover:text-darkGray/70 list-cur"
+            >Plan</a
+          >
+          <a
+            href="/train"
+            class="p-2 m-3 font-medium text-[20px] cursor-pointer text-darkGray hover:text-darkGray/70"
+            >Train</a
+          >
+          <a
+            href="/leaderboard"
+            class="p-2 m-3 font-medium text-[20px] cursor-pointer text-darkGray hover:text-darkGray/70"
+            >Leaderboard</a
+          >
+          <div class="flex items-center">
+            <div
+              class="ml-5 w-[50px] h-[50px] mr-4 rounded-full overflow-hidden"
+            >
+              <img
+                src="/Asset/Barbel.jpg"
+                alt="foto"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <p class="text-[18px]">{Nama}</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    // Save workout plan (could be expanded to save to a database or localStorage)
-    function saveWorkoutPlan() {
-      const planName = document.getElementById('plan-name').innerText;
-      const muscleName = document.getElementById('muscle-name').innerText;
-      const workoutItems = Array.from(document.querySelectorAll('.workout-item')).map(item => {
-        return {
-          workout: item.querySelector('span').innerText,
-          kg: item.querySelector('.kg-input').value,
-          reps: item.querySelector('.reps-input').value
-        };
-      });
-      
-      // For demo purposes, we'll log the data to the console
-      console.log({
-        planName,
-        muscleName,
-        workoutItems
-      });
+    <div class="workout-container flex flex-col justify-center items-center">
+      <h2 id="plan-name" class="font-bold text-shadow-lg text-[56px] text-tan">
+        My Plan
+      </h2>
+      <div id="workout-sections" class="w-[780px]"></div>
+      <select id="workout-dropdown" class="cursor-pointer w-[780px]">
+        <option value="Squat">Squat</option>
+        <option value="Bench Press">Bench Press</option>
+        <option value="Deadlift">Deadlift</option>
+        <option value="Overhead Press">Overhead Press</option>
+        <option value="Pull-Up">Pull-Up</option>
+      </select>
+      <button
+        id="add-section-btn"
+        class="mb-10 mt-10 text-darkGray hover:text-darkGray/50 transition"
+      >
+        ➕ Add Selected Workout Section
+      </button>
+      <button class="btn-tan w-[780px]" onclick="saveWorkoutPlan()">
+        DONE
+      </button>
+    </div>
 
-      alert('Workout Plan Saved!');
-    }
-  </script>
-</body>
+    <script>
+      let workoutPlan = [];
+
+      function renderSections() {
+        const workoutSections = document.getElementById("workout-sections");
+        workoutSections.innerHTML = "";
+        workoutPlan.forEach((section, sectionIndex) => {
+          const sectionDiv = document.createElement("div");
+          sectionDiv.className = "workout-list text-darkGrey";
+          sectionDiv.innerHTML = `
+          <h3 class="text-darkGrey text-[20px]">${section.name}</h3>
+          <button onclick="deleteSection(${sectionIndex}) class="text-darkGrey text-[20px]">🗑️ Delete Section</button>
+          ${section.sets
+            .map(
+              (set, setIndex) => `
+            <div class="workout-item" class="w-[780px]">
+              <span class="text-darkGrey">${set.name}</span>
+              <input type="number" value="${set.kg}" min="1" placeholder="kg">
+              <input type="number" value="${set.reps}" min="1" placeholder="reps">
+              <button onclick="deleteSet(${sectionIndex}, ${setIndex})" class="btn-tan">❌ Delete</button>
+            </div>
+          `
+            )
+            .join("")}
+          <button onclick="addSet(${sectionIndex})" class="btn-tan h-[50px] flex justify-center item-center mt-10">➕ Add Set</button>
+        `;
+          workoutSections.appendChild(sectionDiv);
+        });
+      }
+
+      function addSection() {
+        const workoutDropdown = document.getElementById("workout-dropdown");
+        const selectedWorkout = workoutDropdown.value;
+        workoutPlan.push({ name: selectedWorkout, sets: [] });
+        renderSections();
+      }
+
+      function addSet(sectionIndex) {
+        workoutPlan[sectionIndex].sets.push({
+          name: "New Set",
+          kg: 0,
+          reps: 0,
+        });
+        renderSections();
+      }
+
+      function deleteSection(sectionIndex) {
+        workoutPlan.splice(sectionIndex, 1);
+        renderSections();
+      }
+
+      function deleteSet(sectionIndex, setIndex) {
+        workoutPlan[sectionIndex].sets.splice(setIndex, 1);
+        renderSections();
+      }
+
+      function saveWorkoutPlan() {
+        console.log(workoutPlan);
+        alert("Workout Plan Saved!");
+      }
+
+      document
+        .getElementById("add-section-btn")
+        .addEventListener("click", addSection);
+      renderSections();
+    </script>
+  </body>
 </html>
