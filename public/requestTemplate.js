@@ -76,7 +76,7 @@ async function getExerciseData(id)
     return await tryFetchJson(`/api/exercise?id=${id}`, req);
 }
 
-async function createWorkoutPlan(name, exercises)
+async function createWorkoutPlan(name)
 {
     const req =
     {
@@ -87,7 +87,7 @@ async function createWorkoutPlan(name, exercises)
         },
         body: JSON.stringify({
             'name': name,
-            'exercises': exercises
+            'exercises': []
         })
     };
 
@@ -187,7 +187,7 @@ async function getWorkoutLogHeaders()
     return await tryFetchJson(`/api/log/headers`, req);
 }
 
-async function getWorkoutLogData()
+async function getWorkoutLogData(id)
 {
     const req =
     {
