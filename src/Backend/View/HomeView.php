@@ -9,7 +9,7 @@ class HomeView extends View
 {
     public function render()
     {
-        HTTPUtils::sendHTML(200, '/home');
+        HTTPUtils::sendHTMLAtPublic(200, 'HomeView.html');
     }
 }
 ?>

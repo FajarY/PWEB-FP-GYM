@@ -8,7 +8,7 @@ class PlanView extends View
 {
     public function render()
     {
-        HTTPUtils::sendHTML(200, '/plan');
+        HTTPUtils::sendHTMLAtPublic(200, 'Plan.html');
     }
 }
 ?>

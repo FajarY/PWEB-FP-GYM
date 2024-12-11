@@ -3,19 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../output.css" />
+    <link rel="stylesheet" href="/output.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
       rel="stylesheet"
     />
     <title>Register View</title>
+    <script defer type="module" src="./VerifyView.js"></script>
   </head>
   <body class="font-baloo">
     <div class="flex">
       <!-- Left Section -->
       <div class="bg-greenLight h-screen w-[540px] overflow-hidden relative">
         <img
-          src="../Asset/Landing View.jpg"
+          src="/Asset/Landing View.jpg"
           alt="foto gym"
           class="h-full w-full object-cover opacity-20"
         />
@@ -47,6 +48,7 @@
                   >Username <span class="text-[#E54466]">*</span></label
                 >
                 <input
+                  id="username"
                   type="text"
                   placeholder="Username"
                   class="w-full border border-darkGray/20 bg-cream rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-greenPale shadow-custom"
@@ -57,6 +59,7 @@
                   >Date of Birth <span class="text-[#E54466]">*</span></label
                 >
                 <input
+                  id="date-of-birth"
                   type="date"
                   class="w-full border border-darkGray/20 bg-cream rounded-lg p-3 focus:outline-none focus:ring-1 focus:ring-greenPale shadow-custom"
                 />
@@ -106,19 +109,14 @@
             </div>
             <div class="mt-4">
               <button
+                id="submit"
                 type="submit"
                 class="h-[43px] w-full btn-tan-other flex justify-center items-center"
               >
-                Register
+                Verify
               </button>
             </div>
           </form>
-
-          <!-- Login Link -->
-          <p class="text-center mt-4 text-shadow-lg">
-            Already have an account?
-            <a href="#" class="text-tan font-bold hover:underline">Login</a>
-          </p>
         </div>
       </div>
     </div>

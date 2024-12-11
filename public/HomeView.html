@@ -53,10 +53,10 @@
       color: #333;
       margin-bottom: 1rem;
     }
-    .plans, .logs, .chart {
+    .plans, .logs, .export-pdf {
       margin-bottom: 2rem;
     }
-    .plans h3, .logs h3, .chart h3 {
+    .plans h3, .logs h3, .export-pdf h3 {
       color: #c0936a;
       margin-bottom: 1rem;
     }
@@ -98,7 +98,17 @@
     .delete-btn:hover {
       color: #f44336;
     }
-    .logs .log {
+    .logs {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .log {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -120,87 +130,40 @@
       font-weight: bold;
     }
   </style>
+  <link rel="stylesheet" href="/output.css" />
+  <script type="module" defer src="./HomeView.js"></script>
 </head>
 <body>
   <div class="navbar">
     <h1 class="logo">GYM JOURNAL</h1>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Plan</a>
-      <a href="#">Train</a>
-      <a href="#">Leaderboard</a>
+      <a href="/home">Home</a>
+      <a href="/leaderboard">Leaderboard</a>
     </nav>
-    <div class="profile">
-      <img src="profile-placeholder.jpg" alt="Profile" class="profile-pic">
-      <span>Lionel Messi</span>
-    </div>
   </div>
 
-  <div class="container">
-    <h2>Welcome, {Name}</h2>
+  <div class="w-full p-8">
+    <h2 class="text-2xl font-bold" id="welcome-name">Welcome </h2>
     <div class="plans">
-      <h3>Plans</h3>
+      <h3 class="font-bold">Plans</h3>
       <div id="plans-list">
-        <div class="plan">
-          <span>{Plan 1}</span>
-          <span>Time: X minutes</span>
-          <button class="edit-btn">✏️</button>
-          <button class="delete-btn">🗑️</button>
-        </div>
-        <div class="plan">
-          <span>{Plan 2}</span>
-          <span>Time: X minutes</span>
-          <button class="edit-btn">✏️</button>
-          <button class="delete-btn">🗑️</button>
-        </div>
-      </div>
-      <button class="add-btn">➕</button>
-    </div>
 
-    <div class="logs">
-      <h3>Logs</h3>
-      <div class="log">
-        <span>Date: 00/00/00</span>
-        <span>Score: XXX</span>
       </div>
-      <div class="log">
-        <span>Date: 00/00/00</span>
-        <span>Score: XXX</span>
+      <button id="add-plan" class="add-btn">➕</button>
+    </div>
+    <div class="flex-row">
+      <h3 class="mb-4 text-red-600 font-bold">Logs</h3>
+      <div class="flex-row">
+        <div id="log-list" class="w-full">
+        </div>
       </div>
     </div>
 
-    <div class="chart">
-      <h3>Chart</h3>
-      <div class="chart-placeholder">[Pie Chart]</div>
+    <div class="export-pdf">
+      <h3>Exports</h3>
+      <button id="add-plan" class="add-btn" onclick="window.open('/api/plan/pdf', '_blank')">Export Plans to PDF</button>
+      <button id="add-plan" class="add-btn" onclick="window.open('/api/log/pdf', '_blank')">Export Logs to PDF</button>
     </div>
   </div>
-
-  <script>
-    const addBtn = document.querySelector(".add-btn");
-    const plansList = document.getElementById("plans-list");
-
-    // Add functionality
-    addBtn.addEventListener("click", () => {
-      const newPlan = document.createElement("div");
-      newPlan.className = "plan";
-      newPlan.innerHTML = `
-        <span>{New Plan}</span>
-        <span>Time: X minutes</span>
-        <button class="edit-btn">✏️</button>
-        <button class="delete-btn">🗑️</button>
-      `;
-      plansList.appendChild(newPlan);
-    });
-
-    // Delete and edit functionality
-    plansList.addEventListener("click", (e) => {
-      if (e.target.classList.contains("delete-btn")) {
-        e.target.parentElement.remove();
-      }
-      if (e.target.classList.contains("edit-btn")) {
-        window.location.href = "/public/Pages/Plan.html";
-      }
-    });
-  </script>
 </body>
 </html>
